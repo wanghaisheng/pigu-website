@@ -1,0 +1,964 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轻断食 - 您的专属养生平台</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 主色调 */
+            --primary: #6D9788; /* 青绿色 */
+            --primary-dark: #527A6B;
+            --primary-light: #87B3A3;
+            /* 辅助色 */
+            --secondary: #4A638C; /* 黛蓝色 */
+            --secondary-light: #6B89B3;
+            --accent-yellow: #F3E9D2; /* 宣纸黄 */
+            --accent-amber: #FFB300; /* 琥珀色 */
+            --data-blue: #2E5266; /* 深蓝色，数据图表常用 */
+            --neon-green: #00FF85;
+
+            /* 暗色背景 */
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --bg-card-hover: #252525;
+            --bg-light-grey: #282828; /* 比card稍亮的灰色，用于分割线等 */
+
+
+            /* 文本颜色 */
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --text-disabled: rgba(255, 255, 255, 0.3);
+            --text-amber: #FFB300; /* 琥珀色文本，用于警示 */
+
+
+            /* 边框与阴影 */
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-medium: rgba(255, 255, 255, 0.2);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-neon-green: 0 0 15px rgba(0, 255, 133, 0.5);
+
+            /* 间距 */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            --space-xxxl: 64px;
+
+            /* 圆角 */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* 字号 */
+            --font-size-sm: 12px;
+            --font-size-md: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 20px;
+            --font-size-xxl: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit; /* 继承父元素颜色 */
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px; /* 模拟手机屏幕宽度 */
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
+            overflow: hidden; /* 防止内容超出时出现滚动条 */
+        }
+
+        .screen {
+            width: 100%; /* 屏幕宽度占满容器 */
+            height: auto; /* 内容自适应高度 */
+            overflow-y: auto; /* 允许内容在屏幕内滚动 */
+            -webkit-overflow-scrolling: touch; /* 启用iOS的流畅滚动 */
+            padding-bottom: 80px; /* 底部导航栏高度 */
+        }
+
+
+        /* 顶部导航栏 */
+        .top-nav {
+            background-color: var(--bg-card);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky; /* 粘性定位 */
+            top: 0;
+            z-index: 100; /* 确保在内容之上 */
+        }
+
+        .top-nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .top-nav-menu-item {
+            font-weight: 500;
+            color: var(--text-primary);
+            padding: var(--space-sm) 0;
+            border-bottom: 2px solid transparent; /* 默认透明边框 */
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .top-nav-menu-item.active, .top-nav-menu-item:hover {
+            border-color: var(--primary); /* 激活或悬停时显示边框 */
+        }
+        .top-nav-menu-item.active {
+            color: var(--primary);
+        }
+
+        .top-nav-menu-item .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-top: none;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            padding: var(--space-sm) 0;
+            z-index: 110;
+            display: none; /* Initially hidden */
+        }
+
+        .top-nav-menu-item:hover .dropdown-menu,
+        .top-nav-menu-item.active .dropdown-menu {
+            display: block; /* Show on hover or when active */
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: var(--space-md) var(--space-lg);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-card-hover);
+        }
+
+        /* 首页内容区域 */
+        .home-content {
+            padding: var(--space-lg);
+        }
+
+        .section-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        .section-title .material-icons {
+            font-size: var(--font-size-xxl);
+            vertical-align: middle;
+        }
+
+
+        /* 仪表盘样式 (示例) */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .dashboard-item {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .dashboard-value {
+            font-size: var(--font-size-xxl);
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .dashboard-label {
+            font-size: var(--font-size-md);
+            color: var(--text-secondary);
+        }
+
+        .dashboard-chart {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            position: relative; /* For positioning SVG */
+        }
+
+        .dashboard-chart svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 计划方案卡片 */
+        .plan-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-xl);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+        }
+
+        .plan-card-header {
+            background-color: var(--primary);
+            color: var(--text-primary);
+            padding: var(--space-md);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .plan-card-content {
+            padding: var(--space-lg);
+        }
+        .plan-card-content p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        .plan-card-actions {
+            padding: var(--space-md);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+
+        /* 节气养生角 */
+        .season-section {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            border: 1px solid var(--border-light);
+        }
+        .season-section h3 {
+            margin-bottom: var(--space-md);
+        }
+        .season-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .season-section li {
+            padding: var(--space-sm) 0;
+            border-bottom: 1px dashed var(--border-light);
+            color: var(--text-secondary);
+        }
+        .season-section li:last-child {
+            border-bottom: none;
+        }
+
+
+        /* 燃脂沙盘 (占位符) */
+        .fat-burn-sandbox {
+            background-color: var(--bg-light-grey); /* 稍亮的灰色，表示未完成或占位 */
+            border-radius: var(--radius-lg);
+            height: 200px; /* 示例高度 */
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            font-size: var(--font-size-lg);
+            border: 1px dashed var(--border-medium);
+            text-align: center;
+            padding: var(--space-lg);
+        }
+
+        /* 挑战赛入口 */
+        .challenge-entry {
+            background-color: var(--secondary);
+            color: var(--text-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .challenge-entry h3 {
+            margin-bottom: var(--space-md);
+        }
+
+        /* 低卡食谱轮播 (占位符) */
+        .recipe-carousel {
+            background-color: var(--bg-light-grey);
+            border-radius: var(--radius-lg);
+            height: 150px; /* 示例高度 */
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            font-size: var(--font-size-lg);
+            overflow-x: auto; /* 水平滚动，如果需要展示多个食谱 */
+            white-space: nowrap; /* 防止子元素换行 */
+            padding: var(--space-md);
+            border: 1px dashed var(--border-medium);
+        }
+        .recipe-item {
+            display: inline-block; /* 使其水平排列 */
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-right: var(--space-md); /* 食谱项之间的间距 */
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+        .recipe-item:last-child {
+            margin-right: 0; /* 最后一个食谱项去除右边距 */
+        }
+
+
+        /* 禅意时刻 (占位符) */
+        .zen-moment {
+            background-color: var(--accent-yellow);
+            color: var(--secondary);
+            border-radius: var(--radius-lg);
+            height: 200px; /* 示例高度 */
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+            text-align: center;
+            padding: var(--space-lg);
+        }
+
+        /* 文化工具箱 */
+        .culture-toolbox {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        .culture-tool-item {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+        .culture-tool-item .material-icons {
+            font-size: var(--font-size-xxl);
+            color: var(--primary);
+            margin-bottom: var(--space-xs);
+        }
+        .culture-tool-item span {
+            display: block;
+            color: var(--text-secondary);
+            font-size: var(--font-size-md);
+        }
+
+        /* 线下活动 */
+        .offline-activity {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-xl);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+        }
+        .activity-image {
+            height: 150px;
+            background-color: var(--bg-light-grey); /* 占位图背景色 */
+            background-size: cover;
+            background-position: center;
+        }
+        .activity-details {
+            padding: var(--space-lg);
+        }
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+        }
+        .activity-info {
+            color: var(--text-secondary);
+            font-size: var(--font-size-md);
+            margin-bottom: var(--space-md);
+        }
+
+
+        /* 新手指南 */
+        .guide-section {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            border: 1px solid var(--border-light);
+        }
+        .guide-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: var(--space-md);
+        }
+        .step-content {
+            flex: 1;
+        }
+        .step-title {
+            font-weight: 500;
+            margin-bottom: var(--space-xs);
+        }
+        .step-description {
+            color: var(--text-secondary);
+            font-size: var(--font-size-md);
+        }
+
+        /* 安全实验田 */
+        .experiment-section {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            border: 1px solid var(--border-light);
+        }
+        .experiment-item {
+            background-color: var(--bg-light-grey); /* 占位符背景色 */
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: var(--font-size-md);
+            border: 1px dashed var(--border-medium);
+        }
+
+        /* 用户实验室 */
+        .user-lab-section {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            border: 1px solid var(--border-light);
+        }
+        .user-lab-item {
+            background-color: var(--bg-light-grey); /* 占位符背景色 */
+            border-radius: var(--radius-md);
+            height: 120px; /* 示例高度 */
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            font-size: var(--font-size-md);
+            text-align: center;
+            padding: var(--space-lg);
+            border: 1px dashed var(--border-medium);
+        }
+
+
+        /* 底部固定导航栏 */
+        .bottom-nav {
+            background-color: var(--bg-card);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-sm) 0;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-tertiary);
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-icon {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-xs);
+        }
+        .nav-text {
+            font-size: var(--font-size-sm);
+        }
+
+
+        /* 通用按钮样式 */
+        .button {
+            display: inline-block;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            background-color: var(--primary);
+            color: var(--text-primary);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .button.secondary {
+            background-color: var(--secondary);
+        }
+
+        .button.outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .button.outline.secondary {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .button-full-width {
+            display: block;
+            width: 100%;
+        }
+
+        /* Material Icons */
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px; /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
+        /* 辅助类 */
+        .text-center { text-align: center; }
+        .mb-sm { margin-bottom: var(--space-sm); }
+        .mb-md { margin-bottom: var(--space-md); }
+        .mb-lg { margin-bottom: var(--space-lg); }
+        .mb-xl { margin-bottom: var(--space-xl); }
+        .mt-md { margin-top: var(--space-md); }
+        .mt-lg { margin-top: var(--space-lg); }
+        .text-amber { color: var(--text-amber); }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="screen" id="home-screen">
+        <!-- 顶部导航 -->
+        <div class="top-nav">
+            <div class="top-nav-menu">
+                <div class="top-nav-menu-item active" id="target-dropdown-trigger">我的目标 
+                    <span class="material-icons" style="vertical-align: middle; font-size: var(--font-size-lg);">expand_more</span>
+                    <!-- 下拉菜单示例 (实际应用中可能用JS控制显示/隐藏) -->
+                    <div class="dropdown-menu" id="target-dropdown" style="display: none; position: absolute; top: 100%; left: 0; background-color: var(--bg-card); border: 1px solid var(--border-light); border-top: none; border-radius: 0 0 var(--radius-md) var(--radius-md); padding: var(--space-sm) 0; z-index: 110;">
+                        <a href="#" class="dropdown-item" onclick="setTarget('调理身体')">调理身体</a>
+                        <a href="#" class="dropdown-item" onclick="setTarget('减重塑形')">减重塑形</a>
+                        <a href="#" class="dropdown-item" onclick="setTarget('文化体验')">文化体验</a>
+                        <a href="#" class="dropdown-item" onclick="setTarget('健康探索')">健康探索</a>
+                    </div>
+                </div>
+                <a href="products.html" class="top-nav-menu-item">辟谷产品</a>
+                <a href="tools.html" class="top-nav-menu-item">养生工具</a>
+                <a href="knowledge.html" class="top-nav-menu-item">知识库</a>
+                <a href="community.html" class="top-nav-menu-item">社区</a>
+            </div>
+        </div>
+
+        <!-- 首页内容 (调理身体群体示例) -->
+        <div class="home-content" id="tiaoli-content">
+            <section>
+                <h2 class="section-title"><span class="material-icons">dashboard</span> 亚健康指数</h2>
+                <div class="dashboard-container">
+                    <div class="dashboard-item">
+                        <div class="dashboard-value" id="sleep-quality-value">78</div>
+                        <div class="dashboard-label">睡眠质量</div>
+                        <div class="dashboard-chart" id="sleep-quality-chart"></div>
+                    </div>
+                    <div class="dashboard-item">
+                        <div class="dashboard-value" id="fatigue-level-value">65</div>
+                        <div class="dashboard-label">疲劳程度</div>
+                         <div class="dashboard-chart" id="fatigue-level-chart"></div>
+                    </div>
+                    <div class="dashboard-item">
+                        <div class="dashboard-value" id="digestion-value">92</div>
+                        <div class="dashboard-label">消化功能</div>
+                         <div class="dashboard-chart" id="digestion-chart"></div>
+                    </div>
+                    <div class="dashboard-item">
+                        <div class="dashboard-value text-amber" id="stress-level-value">低</div>
+                        <div class="dashboard-label">压力水平</div>
+                         <div class="dashboard-chart" id="stress-level-chart"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title"><span class="material-icons">assignment</span> 本周调理计划</h2>
+                <div class="plan-card">
+                    <div class="plan-card-header">3日果蔬轻断食 + 经络按摩</div>
+                    <div class="plan-card-content">
+                        <p>结合轻柔的果蔬断食，为身体排毒减负，配合中医经络按摩，促进气血循环，提升调理效果。</p>
+                        <p><strong>方案亮点：</strong></p>
+                        <ul>
+                            <li>膳食均衡，富含维生素</li>
+                            <li>按摩手法专业指导</li>
+                            <li>附赠体质分析问卷</li>
+                        </ul>
+                    </div>
+                    <div class="plan-card-actions">
+                        <a href="#" class="button outline">查看详情</a>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title"><span class="material-icons">local_florist</span> 节气养生角 - 秋季</h2>
+                <div class="season-section">
+                    <h3>秋季推荐食材</h3>
+                    <ul>
+                        <li>银耳百合羹 (润肺养颜)</li>
+                        <li>雪梨 (清热化痰)</li>
+                        <li>莲藕 (健脾开胃)</li>
+                        <li>红枣 (补气养血)</li>
+                    </ul>
+                    <div class="mt-md text-center">
+                        <a href="#" class="button outline secondary">查看更多秋季养生食谱</a>
+                    </div>
+                </div>
+            </section>
+
+             <!-- 其他首页模块根据用户目标动态展示，这里只展示“调理身体”的 -->
+
+        </div>
+
+        <!-- 首页内容 (减重塑形群体示例) -->
+        <div class="home-content" id="jianzhong-content" style="display: none;">
+            <section>
+                <h2 class="section-title"><span class="material-icons">visibility</span> 视觉化燃脂沙盘</h2>
+                <div class="fat-burn-sandbox">
+                    <p>【燃脂沙盘 - 3D模型占位符】<br>上传照片，滑动滑块，预览体型变化</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title"><span class="material-icons">emoji_events</span> 30天腰围挑战赛</h2>
+                <div class="challenge-entry">
+                    <h3>30天腰围挑战</h3>
+                    <p>参与挑战，赢取丰厚奖金，塑造理想腰线！</p>
+                    <div class="mt-md">
+                        <a href="#" class="button secondary">立即报名</a>
+                    </div>
+                    <p class="mt-md text-amber">已有 1287 人参与，奖金池 ¥ 8888</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title"><span class="material-icons">local_dining</span> 低卡食谱推荐</h2>
+                <div class="recipe-carousel">
+                    <div class="recipe-item">
+                        <h3>冬瓜薏米水</h3>
+                        <p>清爽解腻，低卡消肿</p>
+                    </div>
+                    <div class="recipe-item">
+                        <h3>柠檬薄荷茶</h3>
+                        <p>清新提神，加速代谢</p>
+                    </div>
+                    <div class="recipe-item">
+                        <h3>蔬菜鸡胸沙拉</h3>
+                        <p>高蛋白，饱腹感强</p>
+                    </div>
+                    <!-- 更多食谱项 -->
+                </div>
+            </section>
+        </div>
+
+        <!-- 首页内容 (文化体验群体示例) -->
+        <div class="home-content" id="wenhua-content" style="display: none;">
+            <section>
+                <h2 class="section-title"><span class="material-icons">nature</span> 今日禅意时刻</h2>
+                <div class="zen-moment">
+                    <p>【终南山慢直播 + 古琴 + 《庄子》金句 占位符】</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title"><span class="material-icons">auto_stories</span> 文化工具箱</h2>
+                <div class="culture-toolbox">
+                    <a href="#" class="culture-tool-item">
+                        <span class="material-icons">today</span>
+                        <span>节气日历</span>
+                    </a>
+                    <a href="#" class="culture-tool-item">
+                        <span class="material-icons">music_note</span>
+                        <span>古籍诵读</span>
+                    </a>
+                    <a href="#" class="culture-tool-item">
+                        <span class="material-icons">audiotrack</span>
+                        <span>冥想音频</span>
+                    </a>
+                    <!-- 更多工具项 -->
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title"><span class="material-icons">event</span> 线下活动预告</h2>
+                <div class="offline-activity">
+                    <div class="activity-image" style="background-image: url('placeholder-tea-ceremony.jpg');"></div>
+                    <div class="activity-details">
+                        <h3 class="activity-title">秋分辟谷茶会</h3>
+                        <p class="activity-info">竹林深处的静心茶会，体验传统辟谷文化。</p>
+                        <a href="#" class="button outline secondary">了解详情</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 首页内容 (健康探索群体示例) -->
+        <div class="home-content" id="explore-content" style="display: none;">
+            <section>
+                <h2 class="section-title"><span class="material-icons">lightbulb</span> 新手指南</h2>
+                <div class="guide-section">
+                    <div class="guide-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">了解辟谷基础</h3>
+                            <p class="step-description">学习辟谷的概念、益处与注意事项。</p>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">风险评估</h3>
+                            <p class="step-description">使用工具评估自身健康状况与辟谷风险。</p>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">选择轻度方案</h3>
+                            <p class="step-description">从12小时轻断食或果蔬汁辟谷开始尝试。</p>
+                        </div>
+                    </div>
+                    <!-- 更多步骤 -->
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title"><span class="material-icons">verified_user</span> 安全实验田</h2>
+                <div class="experiment-section">
+                    <div class="experiment-item">
+                        <h3>12小时轻断食</h3>
+                        <p>推荐人群：初次尝试者</p>
+                    </div>
+                    <div class="experiment-item">
+                        <h3>周末果蔬汁</h3>
+                        <p>推荐人群：日常饮食健康者</p>
+                    </div>
+                    <!-- 更多实验项目 -->
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title"><span class="material-icons">science</span> 用户实验室</h2>
+                <div class="user-lab-section">
+                    <div class="user-lab-item">
+                        <p>【用户UGC趣味实验 - 嗅觉敏感度测试 占位符】</p>
+                    </div>
+                    <div class="user-lab-item">
+                        <p>【用户UGC趣味实验 - 味觉变化记录 占位符】</p>
+                    </div>
+                    <!-- 更多用户实验 -->
+                </div>
+            </section>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item active">
+                <span class="material-icons nav-icon">home</span>
+                <span class="nav-text">首页</span>
+            </a>
+            <a href="community.html" class="nav-item">
+                <span class="material-icons nav-icon">forum</span>
+                <span class="nav-text">社区</span>
+            </a>
+            <a href="tools.html" class="nav-item">
+                <span class="material-icons nav-icon">build</span>
+                <span class="nav-text">工具</span>
+            </a>
+            <a href="knowledge.html" class="nav-item">
+                <span class="material-icons nav-icon">school</span>
+                <span class="nav-text">知识</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="material-icons nav-icon">person</span>
+                <span class="nav-text">我的</span>
+            </a>
+        </nav>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const targetDropdownTrigger = document.getElementById('target-dropdown-trigger');
+        const targetDropdown = document.getElementById('target-dropdown');
+        const homeContents = {
+            '调理身体': 'tiaoli-content',
+            '减重塑形': 'jianzhong-content',
+            '文化体验': 'wenhua-content',
+            '健康探索': 'explore-content'
+        };
+
+        targetDropdownTrigger.addEventListener('click', (event) => {
+            event.stopPropagation();
+            targetDropdown.style.display = targetDropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!targetDropdownTrigger.contains(event.target)) {
+                targetDropdown.style.display = 'none';
+            }
+        });
+
+
+        function setTarget(targetName) {
+            //alert('目标已设置为: ' + targetName); // 示例：可以替换为实际的目标设置逻辑
+            document.getElementById('target-dropdown').style.display = 'none';
+            document.getElementById('target-dropdown-trigger').firstChild.textContent = targetName + ' ';
+
+            // Hide all home contents
+            for (const contentId in homeContents) {
+                document.getElementById(homeContents[contentId]).style.display = 'none';
+            }
+            // Show the selected home content
+            if (homeContents[targetName]) {
+                document.getElementById(homeContents[targetName]).style.display = 'block';
+            }
+        }
+
+
+        function createCircularChart(elementId, value, color) {
+            const container = document.getElementById(elementId);
+            const radius = 20;
+            const circumference = 2 * Math.PI * radius;
+            const progress = value / 100;
+            const dashOffset = circumference * (1 - progress);
+
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute('width', '50');
+            svg.setAttribute('height', '50');
+
+            const backgroundCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+            backgroundCircle.setAttribute('cx', '25');
+            backgroundCircle.setAttribute('cy', '25');
+            backgroundCircle.setAttribute('r', radius);
+            backgroundCircle.setAttribute('fill', 'none');
+            backgroundCircle.setAttribute('stroke', 'rgba(255, 255, 255, 0.1)');
+            backgroundCircle.setAttribute('stroke-width', '4');
+
+            const progressCircle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+            progressCircle.setAttribute('cx', '25');
+            progressCircle.setAttribute('cy', '25');
+            progressCircle.setAttribute('r', radius);
+            progressCircle.setAttribute('fill', 'none');
+            progressCircle.setAttribute('stroke', color);
+            progressCircle.setAttribute('stroke-width', '4');
+            progressCircle.setAttribute('stroke-dasharray', circumference);
+            progressCircle.setAttribute('stroke-dashoffset', circumference);
+            progressCircle.style.strokeDashoffset = dashOffset;
+            progressCircle.style.transition = 'stroke-dashoffset 1s ease-out'; // Animation
+
+            svg.appendChild(backgroundCircle);
+            svg.appendChild(progressCircle);
+            container.appendChild(svg);
+
+             // Trigger animation after a short delay to ensure element is rendered
+            setTimeout(() => {
+                progressCircle.style.strokeDashoffset = dashOffset;
+            }, 100);
+        }
+
+
+        createCircularChart('sleep-quality-chart', parseInt(document.getElementById('sleep-quality-value').textContent), 'var(--primary)');
+        createCircularChart('fatigue-level-chart', parseInt(document.getElementById('fatigue-level-value').textContent), 'var(--secondary)');
+        createCircularChart('digestion-chart', parseInt(document.getElementById('digestion-value').textContent), 'var(--neon-green)');
+        createCircularChart('stress-level-chart', 20, 'var(--accent-amber)'); // Example value for stress level, adjust as needed
+
+    });
+
+
+</script>
+</body>
+</html>
