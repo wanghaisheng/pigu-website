@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>养生工具 - 轻断食养生平台</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            /* 颜色变量 (与 index.html 相同) */
+            /* ... (省略颜色变量定义，与 index.html 保持一致) ... */
+
+            /* 主色调 */
+            --primary: #6D9788; /* 青绿色 */
+            --primary-dark: #527A6B;
+            --primary-light: #87B3A3;
+            /* 辅助色 */
+            --secondary: #4A638C; /* 黛蓝色 */
+            --secondary-light: #6B89B3;
+            --accent-yellow: #F3E9D2; /* 宣纸黄 */
+            --accent-amber: #FFB300; /* 琥珀色 */
+            --data-blue: #2E5266; /* 深蓝色，数据图表常用 */
+            --neon-green: #00FF85;
+
+            /* 暗色背景 */
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --bg-card-hover: #252525;
+            --bg-light-grey: #282828; /* 比card稍亮的灰色，用于分割线等 */
+
+
+            /* 文本颜色 */
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --text-disabled: rgba(255, 255, 255, 0.3);
+            --text-amber: #FFB300; /* 琥珀色文本，用于警示 */
+
+
+            /* 边框与阴影 */
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-medium: rgba(255, 255, 255, 0.2);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-neon-green: 0 0 15px rgba(0, 255, 133, 0.5);
+
+            /* 间距 */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            --space-xxxl: 64px;
+
+            /* 圆角 */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* 字号 */
+            --font-size-sm: 12px;
+            --font-size-md: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 20px;
+            --font-size-xxl: 24px;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit; /* 继承父元素颜色 */
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px; /* 模拟手机屏幕宽度 */
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
+            overflow: hidden; /* 防止内容超出时出现滚动条 */
+        }
+
+        .screen {
+            width: 100%; /* 屏幕宽度占满容器 */
+            height: auto; /* 内容自适应高度 */
+            overflow-y: auto; /* 允许内容在屏幕内滚动 */
+            -webkit-overflow-scrolling: touch; /* 启用iOS的流畅滚动 */
+            padding-bottom: 80px; /* 底部导航栏高度 */
+        }
+
+        /* 顶部导航栏 */
+        .top-nav {
+            background-color: var(--bg-card);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky; /* 粘性定位 */
+            top: 0;
+            z-index: 100; /* 确保在内容之上 */
+        }
+
+        .top-nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .top-nav-menu-item {
+            font-weight: 500;
+            color: var(--text-primary);
+            padding: var(--space-sm) 0;
+            border-bottom: 2px solid transparent; /* 默认透明边框 */
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .top-nav-menu-item.active, .top-nav-menu-item:hover {
+            border-color: var(--primary); /* 激活或悬停时显示边框 */
+        }
+
+
+        /* 工具中心内容 */
+        .tools-content {
+            padding: var(--space-lg);
+        }
+
+        .section-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        .section-title .material-icons {
+            font-size: var(--font-size-xxl);
+            vertical-align: middle;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .tool-icon {
+            font-size: var(--font-size-xxxl);
+            color: var(--primary);
+            margin-bottom: var(--space-sm);
+            display: flex; /* 确保图标居中 */
+            align-items: center;
+            justify-content: center;
+            width: 60px; /* 固定宽度 */
+            height: 60px; /* 固定高度 */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        .tool-title {
+            font-weight: 500;
+            margin-bottom: var(--space-xs);
+        }
+
+        .tool-description {
+            color: var(--text-secondary);
+            font-size: var(--font-size-md);
+        }
+
+
+        /* 底部固定导航栏 (与 index.html 相同) */
+        .bottom-nav {
+            background-color: var(--bg-card);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-sm) 0;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-tertiary);
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-icon {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-xs);
+        }
+        .nav-text {
+            font-size: var(--font-size-sm);
+        }
+
+
+        /* 通用按钮样式 (与 index.html 相同) */
+        .button {
+            display: inline-block;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            background-color: var(--primary);
+            color: var(--text-primary);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .button.secondary {
+            background-color: var(--secondary);
+        }
+
+        .button.outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .button.outline.secondary {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .button-full-width {
+            display: block;
+            width: 100%;
+        }
+
+        /* Material Icons */
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px; /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
+        /* 辅助类 */
+        .text-center { text-align: center; }
+        .mb-sm { margin-bottom: var(--space-sm); }
+        .mb-md { margin-bottom: var(--space-md); }
+        .mb-lg { margin-bottom: var(--space-lg); }
+        .mb-xl { margin-bottom: var(--space-xl); }
+        .mt-md { margin-top: var(--space-md); }
+        .mt-lg { margin-top: var(--space-lg); }
+        .text-amber { color: var(--text-amber); }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="screen" id="tools-screen">
+        <!-- 顶部导航 -->
+        <div class="top-nav">
+            <div class="top-nav-menu">
+                <a href="index.html" class="top-nav-menu-item">我的目标</a>
+                <a href="products.html" class="top-nav-menu-item">辟谷产品</a>
+                <div class="top-nav-menu-item active">养生工具</div>
+                <a href="knowledge.html" class="top-nav-menu-item">知识库</a>
+                <a href="community.html" class="top-nav-menu-item">社区</a>
+            </div>
+        </div>
+
+        <!-- 工具中心内容 -->
+        <div class="tools-content">
+            <section>
+                <h2 class="section-title"><span class="material-icons">build</span> 实用养生工具</h2>
+                <div class="tool-grid">
+                    <!-- 工具卡片 1 -->
+                    <a href="#" class="tool-card">
+                        <span class="material-icons tool-icon">assessment</span>
+                        <h3 class="tool-title">风险评估</h3>
+                        <p class="tool-description">快速评估辟谷风险，了解自身状况。</p>
+                    </a>
+
+                    <!-- 工具卡片 2 -->
+                    <a href="#" class="tool-card">
+                        <span class="material-icons tool-icon">timer</span>
+                        <h3 class="tool-title">断食计时</h3>
+                        <p class="tool-description">记录断食时长，追踪进度。</p>
+                    </a>
+
+                    <!-- 工具卡片 3 -->
+                    <a href="#" class="tool-card">
+                        <span class="material-icons tool-icon">warning</span>
+                        <h3 class="tool-title">急救指南</h3>
+                        <p class="tool-description">应对不适，安全指导。</p>
+                    </a>
+
+                    <!-- 工具卡片 4 -->
+                    <a href="#" class="tool-card">
+                        <span class="material-icons tool-icon">event_note</span>
+                        <h3 class="tool-title">打卡日历</h3>
+                        <p class="tool-description">记录每日状态，形成习惯。</p>
+                    </a>
+
+                    <!-- 工具卡片 5 -->
+                    <a href="#" class="tool-card">
+                        <span class="material-icons tool-icon">accessibility_new</span>
+                        <h3 class="tool-title">体质测试</h3>
+                        <p class="tool-description">中医体质分析，个性化建议。</p>
+                    </a>
+
+                    <!-- 工具卡片 6 -->
+                    <a href="#" class="tool-card">
+                        <span class="material-icons tool-icon">insert_chart</span>
+                        <h3 class="tool-title">成果生成器</h3>
+                        <p class="tool-description">可视化成果，激励坚持。</p>
+                    </a>
+                </div>
+            </section>
+
+            <section class="mt-xl">
+                <h2 class="section-title"><span class="material-icons">lightbulb_outline</span> 特色工具示例</h2>
+
+                <div class="tool-card">
+                    <h3 class="tool-title">辟谷适性测试</h3>
+                    <p class="tool-description">10道趣味题，测测你的辟谷倾向，生成个性化建议。</p>
+                    <div class="mt-md">
+                        <a href="#pigu-suitability-test" class="button outline">开始测试</a>
+                    </div>
+                </div>
+
+                <div class="tool-card mt-md">
+                    <h3 class="tool-title">不良反应导航仪</h3>
+                    <p class="tool-description">选择不适症状，获取动态应对步骤流程图，保障安全。</p>
+                    <div class="mt-md">
+                        <a href="#adverse-reaction-navigator" class="button outline">启动导航</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="material-icons nav-icon">home</span>
+                <span class="nav-text">首页</span>
+            </a>
+            <a href="community.html" class="nav-item">
+                <span class="material-icons nav-icon">forum</span>
+                <span class="nav-text">社区</span>
+            </a>
+            <a href="tools.html" class="nav-item active">
+                <span class="material-icons nav-icon">build</span>
+                <span class="nav-text">工具</span>
+            </a>
+            <a href="knowledge.html" class="nav-item">
+                <span class="material-icons nav-icon">school</span>
+                <span class="nav-text">知识</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="material-icons nav-icon">person</span>
+                <span class="nav-text">我的</span>
+            </a>
+        </nav>
+
+    </div>
+</div>
+
+<section class="mt-xl" id="pigu-suitability-test" style="display: none;">
+    <h2 class="section-title"><span class="material-icons">lightbulb_outline</span> 辟谷适性测试</h2>
+    <div class="tool-card">
+        <h3 class="tool-title">测测你的辟谷倾向</h3>
+        <p class="tool-description">10道趣味题，测测你的辟谷倾向，生成个性化建议。</p>
+        <div class="mt-md">
+            <div id="test-container">
+                <div class="question" data-question-id="1">
+                    <p class="question-text">Q1: 听到“断食”时，你首先想到的是？</p>
+                    <label><input type="radio" name="q1" value="culture"> 文化传承，身心修行</label><br>
+                    <label><input type="radio" name="q1" value="science"> 细胞自噬，科学研究</label><br>
+                    <label><input type="radio" name="q1" value="diet"> 快速瘦身，饮食控制</label>
+                </div>
+
+                <div class="question" data-question-id="2" style="display: none;">
+                    <p class="question-text">Q2: 你通常选择的养生方式是？</p>
+                    <label><input type="radio" name="q2" value="gentle"> 温和渐进，长期调理</label><br>
+                    <label><input type="radio" name="q2" value="efficient"> 高效直接，快速见效</label><br>
+                    <label><input type="radio" name="q2" value="traditional"> 遵循传统，自然之道</label>
+                </div>
+
+                <div class="question" data-question-id="3" style="display: none;">
+                    <p class="question-text">Q3: 你对饥饿感的态度是？</p>
+                    <label><input type="radio" name="q3" value="uncomfortable"> 难以忍受，非常不适</label><br>
+                    <label><input type="radio" name="q3" value="tolerable"> 可以忍受，但需转移注意</label><br>
+                    <label><input type="radio" name="q3" value="acceptable"> 接受并享受身体变化</label>
+                </div>
+                <div class="question" data-question-id="4" style="display: none;">
+                    <p class="question-text">Q4: 你更倾向于哪种辟谷方式？</p>
+                    <label><input type="radio" name="q4" value="light"> 16/8 轻断食</label><br>
+                    <label><input type="radio" name="q4" value="intermittent"> 间歇性断食 (如5+2)</label><br>
+                    <label><input type="radio" name="q4" value="deep"> 3日以上深度辟谷</label>
+                </div>
+                <div class="question" data-question-id="5" style="display: none;">
+                    <p class="question-text">Q5: 你进行辟谷的主要目的是？</p>
+                    <label><input type="radio" name="q5" value="health_improve"> 改善健康指标，提升体质</label><br>
+                    <label><input type="radio" name="q5" value="weight_loss"> 减轻体重，塑造身形</label><br>
+                    <label><input type="radio" name="q5" value="spiritual_experience"> 追求身心净化，文化体验</label>
+                </div>
+                <div class="question" data-question-id="6" style="display: none;">
+                    <p class="question-text">Q6: 你喜欢的运动强度是？</p>
+                    <label><input type="radio" name="q6" value="low"> 瑜伽，冥想，轻度散步</label><br>
+                    <label><input type="radio" name="q6" value="moderate"> 快走，慢跑，日常锻炼</label><br>
+                    <label><input type="radio" name="q6" value="high"> 高强度间歇训练，力量训练</label>
+                </div>
+                <div class="question" data-question-id="7" style="display: none;">
+                    <p class="question-text">Q7: 你的饮食习惯偏向？</p>
+                    <label><input type="radio" name="q7" value="balanced"> 均衡饮食，荤素搭配</label><br>
+                    <label><input type="radio" name="q7" value="vegetarian"> 偏素食，喜蔬果</label><br>
+                    <label><input type="radio" name="q7" value="meat_lover"> 肉食为主，蛋白质需求高</label>
+                </div>
+                <div class="question" data-question-id="8" style="display: none;">
+                    <p class="question-text">Q8: 你的生活节奏通常是？</p>
+                    <label><input type="radio" name="q8" value="relaxed"> 悠闲，注重生活品质</label><br>
+                    <label><input type="radio" name="q8" value="normal"> 规律，工作生活平衡</label><br>
+                    <label><input type="radio" name="q8" value="fast_paced"> 忙碌，高效率运转</label>
+                </div>
+                <div class="question" data-question-id="9" style="display: none;">
+                    <p class="question-text">Q9: 你对传统文化的兴趣程度？</p>
+                    <label><input type="radio" name="q9" value="very_interested"> 非常热爱，深入研究</label><br>
+                    <label><input type="radio" name="q9" value="interested"> 比较感兴趣，愿意了解</label><br>
+                    <label><input type="radio" name="q9" value="neutral"> 一般，了解不多</label>
+                </div>
+                <div class="question" data-question-id="10" style="display: none;">
+                    <p class="question-text">Q10: 你目前的健康状态自我感觉？</p>
+                    <label><input type="radio" name="q10" value="excellent"> 良好，精力充沛</label><br>
+                    <label><input type="radio" name="q10" value="average"> 一般，偶有疲劳</label><br>
+                    <label><input type="radio" name="q10" value="suboptimal"> 亚健康，需要调理</label>
+                </div>
+
+                <div id="result-container" style="display: none;">
+                    <h3>测试结果</h3>
+                    <p id="result-text">根据您的选择，您的辟谷倾向为 <span id="tendency"></span>，建议 <span id="suggestion"></span>。</p>
+                    <a href="#" class="button outline" onclick="restartTest()">重新测试</a>
+                </div>
+
+                <div class="mt-md">
+                    <button id="next-button" class="button primary" onclick="nextQuestion()">下一题</button>
+                    <button id="submit-button" class="button primary" style="display: none;" onclick="submitTest()">查看结果</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-xl" id="adverse-reaction-navigator" style="display: none;">
+    <h2 class="section-title"><span class="material-icons">lightbulb_outline</span> 不良反应导航仪</h2>
+    <div class="tool-card">
+        <h3 class="tool-title">不良反应导航仪</h3>
+        <p class="tool-description">选择不适症状，获取动态应对步骤流程图，保障安全。</p>
+        <div class="mt-md">
+            <div id="navigator-container">
+                <div class="navigator-question" data-question-id="1">
+                    <p class="question-text">Q1: 请选择您当前最明显的不适症状：</p>
+                    <label><input type="radio" name="nq1" value="hunger"> 强烈饥饿感</label><br>
+                    <label><input type="radio" name="nq1" value="dizziness"> 头晕眼花</label><br>
+                    <label><input type="radio" name="nq1" value="fatigue"> 乏力虚弱</label><br>
+                    <label><input type="radio" name="nq1" value="other_unwell"> 其他不适</label>
+                </div>
+
+                <div class="navigator-question" data-question-id="2" style="display: none;">
+                    <p class="question-text">Q2: 头晕眼花伴随着哪些其他症状？</p>
+                    <label><input type="radio" name="nq2" value="nausea"> 恶心想吐</label><br>
+                    <label><input type="radio" name="nq2" value="headache"> 头痛</label><br>
+                    <label><input type="radio" name="nq2" value="blurred_vision"> 视线模糊</label><br>
+                    <label><input type="radio" name="nq2" value="none"> 没有其他症状，仅头晕</label>
+                </div>
+
+                <div class="navigator-question" data-question-id="3" style="display: none;">
+                    <p class="question-text">Q3: 您感觉乏力虚弱的程度是？</p>
+                    <label><input type="radio" name="nq3" value="mild"> 轻微，尚可忍受</label><br>
+                    <label><input type="radio" name="nq3" value="moderate"> 中等，影响日常活动</label><br>
+                    <label><input type="radio" name="nq3" value="severe"> 严重，难以支撑</label>
+                </div>
+
+                <div id="navigator-result-container" style="display: none;">
+                    <h3>应对建议</h3>
+                    <p id="navigator-result-text">根据您的情况，建议 <span id="navigator-suggestion"></span>。</p>
+                    <a href="#" class="button outline" onclick="restartNavigator()">重新测评</a>
+                </div>
+
+                <div class="mt-md">
+                    <button id="navigator-next-button" class="button primary" onclick="nextNavigatorQuestion()">下一题</button>
+                    <button id="navigator-submit-button" class="button primary" style="display: none;" onclick="submitNavigator()">查看建议</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Smooth scroll to sections
+        $('a[href^="#"]').on('click', function(event) {
+            var target = $(this.getAttribute('href'));
+            if( target.length ) {
+                event.preventDefault();
+                $('html, body').stop().animate({
+                    scrollTop: target.offset().top - 80 // Adjust for top nav height if needed
+                }, 500);
+                 // Show the target section and hide others if needed
+                if (this.getAttribute('href') === '#pigu-suitability-test') {
+                    $('#pigu-suitability-test').show();
+                    $('#adverse-reaction-navigator').hide();
+                    $('.tool-grid').hide();
+                    $('.section-title').first().hide();
+                    $('.section-title').last().hide();
+                } else if (this.getAttribute('href') === '#adverse-reaction-navigator') {
+                    $('#adverse-reaction-navigator').show();
+                    $('#pigu-suitability-test').hide();
+                    $('.tool-grid').hide();
+                    $('.section-title').first().hide();
+                    $('.section-title').last().hide();
+                } else {
+                    $('#pigu-suitability-test').hide();
+                    $('#adverse-reaction-navigator').hide();
+                    $('.tool-grid').show();
+                    $('.section-title').first().show();
+                    $('.section-title').last().show();
+                }
+            }
+        });
+    });
+
+    let currentQuestion = 1;
+    const totalQuestions = 10;
+
+    function nextQuestion() {
+        if (currentQuestion < totalQuestions) {
+            $('.question[data-question-id="' + currentQuestion + '"]').hide();
+            currentQuestion++;
+            $('.question[data-question-id="' + currentQuestion + '"]').show();
+            if (currentQuestion === totalQuestions) {
+                $('#next-button').hide();
+                $('#submit-button').show();
+            }
+        }
+    }
+
+    function submitTest() {
+        // In a real app, you would process the answers and generate a result.
+        // For now, we'll just show a placeholder result.
+        $('#test-container').hide();
+        $('#result-container').show();
+        $('#tendency').text('均衡养生型'); // Replace with actual result logic
+        $('#suggestion').text('建议尝试循序渐进的轻断食方案，如16/8或5+2，并结合温和的运动和传统养生方法。'); // Replace with actual suggestion logic
+    }
+
+    function restartTest() {
+        currentQuestion = 1;
+        $('.question').hide();
+        $('.question[data-question-id="1"]').show();
+        $('#result-container').hide();
+        $('#test-container').show();
+        $('#next-button').show();
+        $('#submit-button').hide();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.tool-card a.button.outline').forEach(anchor => {
+            anchor.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                const targetId = this.getAttribute('href').substring(1); // Get target section id
+                document.querySelectorAll('.screen > section').forEach(section => {
+                    if (section.id === targetId) {
+                        section.style.display = 'block'; // Show target section
+                    } else {
+                        section.style.display = 'none'; // Hide other sections
+                    }
+                });
+                // Hide tool grid and section titles when test or navigator is shown
+                if (targetId === 'pigu-suitability-test' || targetId === 'adverse-reaction-navigator') {
+                    $('.tool-grid').hide();
+                    $('.section-title').first().hide();
+                    $('.section-title').last().hide();
+                } else {
+                    $('.tool-grid').show();
+                    $('.section-title').first().show();
+                    $('.section-title').last().show();
+                }
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const knowledgeCards = document.querySelectorAll('.knowledge-card');
+    });
+
+
+    let currentNavigatorQuestion = 1;
+    const totalNavigatorQuestions = 3;
+
+    function nextNavigatorQuestion() {
+        if (currentNavigatorQuestion < totalNavigatorQuestions) {
+            $('.navigator-question[data-question-id="' + currentNavigatorQuestion + '"]').hide();
+            currentNavigatorQuestion++;
+            $('.navigator-question[data-question-id="' + currentNavigatorQuestion + '"]').show();
+            if (currentNavigatorQuestion === totalNavigatorQuestions) {
+                $('#navigator-next-button').hide();
+                $('#navigator-submit-button').show();
+            }
+        }
+    }
+
+    function submitNavigator() {
+        // Placeholder logic - improve this to provide more specific advice based on answers
+        const answer1 = $('input[name="nq1"]:checked').val();
+        let suggestionText = "请立即停止辟谷，并咨询专业医生。"; // Default severe advice
+
+        if (answer1 === 'hunger') {
+            suggestionText = "您可能只是正常的饥饿感，建议饮用一些温水或淡盐水，并放松心情。";
+        } else if (answer1 === 'dizziness') {
+            suggestionText = "您可能出现低血糖或低血压，建议立即补充少量糖水，并坐下休息。如果症状持续不缓解，请停止辟谷并咨询医生。";
+        } else if (answer1 === 'fatigue') {
+            suggestionText = "轻度乏力是辟谷期间的正常现象，建议减少活动，充分休息。如果乏力感严重，请考虑减少辟谷强度或咨询专业人士。";
+        } else if (answer1 === 'other_unwell') {
+            suggestionText = "请仔细评估您的不适症状，如果症状轻微，可以尝试休息观察。如果症状加重或无法忍受，请立即停止辟谷并咨询医生。";
+        }
+
+        $('#navigator-container').hide();
+        $('#navigator-result-container').show();
+        $('#navigator-suggestion').text(suggestionText);
+    }
+
+    function restartNavigator() {
+        currentNavigatorQuestion = 1;
+        $('.navigator-question').hide();
+        $('.navigator-question[data-question-id="1"]').show();
+        $('#navigator-result-container').hide();
+        $('#navigator-container').show();
+        $('#navigator-next-button').show();
+        $('#navigator-submit-button').hide();
+    }
+</script>
+</html>
