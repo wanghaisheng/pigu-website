@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>辟谷产品中心 - 轻断食养生平台</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 颜色变量 (与 index.html 相同) */
+            /* ... (省略颜色变量定义，与 index.html 保持一致) ... */
+
+            /* 主色调 */
+            --primary: #6D9788; /* 青绿色 */
+            --primary-dark: #527A6B;
+            --primary-light: #87B3A3;
+            /* 辅助色 */
+            --secondary: #4A638C; /* 黛蓝色 */
+            --secondary-light: #6B89B3;
+            --accent-yellow: #F3E9D2; /* 宣纸黄 */
+            --accent-amber: #FFB300; /* 琥珀色 */
+            --data-blue: #2E5266; /* 深蓝色，数据图表常用 */
+            --neon-green: #00FF85;
+
+            /* 暗色背景 */
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --bg-card-hover: #252525;
+            --bg-light-grey: #282828; /* 比card稍亮的灰色，用于分割线等 */
+
+
+            /* 文本颜色 */
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --text-disabled: rgba(255, 255, 255, 0.3);
+            --text-amber: #FFB300; /* 琥珀色文本，用于警示 */
+
+
+            /* 边框与阴影 */
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-medium: rgba(255, 255, 255, 0.2);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-neon-green: 0 0 15px rgba(0, 255, 133, 0.5);
+
+            /* 间距 */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            --space-xxxl: 64px;
+
+            /* 圆角 */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* 字号 */
+            --font-size-sm: 12px;
+            --font-size-md: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 20px;
+            --font-size-xxl: 24px;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit; /* 继承父元素颜色 */
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px; /* 模拟手机屏幕宽度 */
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
+            overflow: hidden; /* 防止内容超出时出现滚动条 */
+        }
+
+        .screen {
+            width: 100%; /* 屏幕宽度占满容器 */
+            height: auto; /* 内容自适应高度 */
+            overflow-y: auto; /* 允许内容在屏幕内滚动 */
+            -webkit-overflow-scrolling: touch; /* 启用iOS的流畅滚动 */
+            padding-bottom: 80px; /* 底部导航栏高度 */
+        }
+
+        /* 顶部导航栏 */
+        .top-nav {
+            background-color: var(--bg-card);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky; /* 粘性定位 */
+            top: 0;
+            z-index: 100; /* 确保在内容之上 */
+        }
+
+        .top-nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .top-nav-menu-item {
+            font-weight: 500;
+            color: var(--text-primary);
+            padding: var(--space-sm) 0;
+            border-bottom: 2px solid transparent; /* 默认透明边框 */
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .top-nav-menu-item.active, .top-nav-menu-item:hover {
+            border-color: var(--primary); /* 激活或悬停时显示边框 */
+        }
+
+
+        /* 产品中心内容 */
+        .product-content {
+            padding: var(--space-lg);
+        }
+
+        .section-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        .section-title .material-icons {
+            font-size: var(--font-size-xxl);
+            vertical-align: middle;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .product-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 120px; /* 固定图片高度 */
+            background-color: var(--bg-light-grey); /* 占位符背景色 */
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-sm);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-title {
+            font-weight: 500;
+            margin-bottom: var(--space-xs);
+        }
+
+        .product-price {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: var(--space-md);
+        }
+
+        .product-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+        }
+
+        .product-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+
+        /* 安心标识 (示例) */
+        .安心-badge {
+            position: relative;
+            display: inline-block;
+        }
+
+        .安心-badge::after {
+            content: "安心认证";
+            position: absolute;
+            top: -10px; /* 向上偏移 */
+            right: -10px; /* 向右偏移 */
+            background-color: var(--neon-green);
+            color: var(--bg-dark);
+            font-size: var(--font-size-sm);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-full);
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* 底部固定导航栏 (与 index.html 相同) */
+        .bottom-nav {
+            background-color: var(--bg-card);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-sm) 0;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-tertiary);
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-icon {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-xs);
+        }
+        .nav-text {
+            font-size: var(--font-size-sm);
+        }
+
+
+        /* 通用按钮样式 (与 index.html 相同) */
+        .button {
+            display: inline-block;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            background-color: var(--primary);
+            color: var(--text-primary);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .button.secondary {
+            background-color: var(--secondary);
+        }
+
+        .button.outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .button.outline.secondary {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .button-full-width {
+            display: block;
+            width: 100%;
+        }
+
+        /* Material Icons */
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px; /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
+        /* 辅助类 */
+        .text-center { text-align: center; }
+        .mb-sm { margin-bottom: var(--space-sm); }
+        .mb-md { margin-bottom: var(--space-md); }
+        .mb-lg { margin-bottom: var(--space-lg); }
+        .mb-xl { margin-bottom: var(--space-xl); }
+        .mt-md { margin-top: var(--space-md); }
+        .mt-lg { margin-top: var(--space-lg); }
+        .text-amber { color: var(--text-amber); }
+
+
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="screen" id="product-screen">
+        <!-- 顶部导航 -->
+        <div class="top-nav">
+            <div class="top-nav-menu">
+                <a href="index.html" class="top-nav-menu-item">我的目标</a>
+                <div class="top-nav-menu-item active">辟谷产品</div>
+                <a href="tools.html" class="top-nav-menu-item">养生工具</a>
+                <a href="knowledge.html" class="top-nav-menu-item">知识库</a>
+                <a href="community.html" class="top-nav-menu-item">社区</a>
+            </div>
+        </div>
+
+        <!-- 产品中心内容 -->
+        <div class="product-content">
+            <section>
+                <h2 class="section-title"><span class="material-icons">storefront</span> 辟谷产品精选</h2>
+                <div class="product-grid">
+                    <!-- 产品卡片 1 -->
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('placeholder-product1.jpg');"></div>
+                        <h3 class="product-title">经典辟谷丹 (传统配方)</h3>
+                        <div class="product-price">¥ 299</div>
+                        <div class="product-tags">
+                            <span class="product-tag">传统配方</span>
+                            <span class="product-tag">平台质检</span>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="button button-full-width">立即购买</a>
+                        </div>
+                    </div>
+
+                    <!-- 产品卡片 2 -->
+                    <div class="product-card 安心-badge">
+                        <div class="product-image" style="background-image: url('placeholder-product2.jpg');"></div>
+                        <h3 class="product-title">高蛋白代餐粉 (巧克力味)</h3>
+                        <div class="product-price">¥ 168</div>
+                        <div class="product-tags">
+                            <span class="product-tag">代餐粉</span>
+                            <span class="product-tag">高蛋白</span>
+                            <span class="product-tag">实测推荐</span>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="button button-full-width">立即购买</a>
+                        </div>
+                    </div>
+
+                    <!-- 产品卡片 3 -->
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('placeholder-product3.jpg');"></div>
+                        <h3 class="product-title">静心香道套装 (入门级)</h3>
+                        <div class="product-price">¥ 388</div>
+                        <div class="product-tags">
+                            <span class="product-tag">文化周边</span>
+                            <span class="product-tag">香道</span>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="button button-full-width">立即购买</a>
+                        </div>
+                    </div>
+
+                    <!-- 更多产品卡片... -->
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('placeholder-product4.jpg');"></div>
+                        <h3 class="product-title">膳食纤维代餐粉 (莓果味)</h3>
+                        <div class="product-price">¥ 158</div>
+                        <div class="product-tags">
+                            <span class="product-tag">代餐粉</span>
+                            <span class="product-tag">膳食纤维</span>
+                            <span class="product-tag">低卡</span>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="button button-full-width">立即购买</a>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('placeholder-product5.jpg');"></div>
+                        <h3 class="product-title">《云笈七签》精装版</h3>
+                        <div class="product-price">¥ 99</div>
+                        <div class="product-tags">
+                            <span class="product-tag">文化周边</span>
+                            <span class="product-tag">书籍</span>
+                            <span class="product-tag">古籍</span>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="button button-full-width">立即购买</a>
+                        </div>
+                    </div>
+
+                     <div class="product-card">
+                        <div class="product-image" style="background-image: url('placeholder-product6.jpg');"></div>
+                        <h3 class="product-title">便携式艾灸盒</h3>
+                        <div class="product-price">¥ 266</div>
+                        <div class="product-tags">
+                            <span class="product-tag">养生工具</span>
+                            <span class="product-tag">中医养生</span>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="button button-full-width">立即购买</a>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('placeholder-product7.jpg');"></div>
+                        <h3 class="product-title"> மூலிகை தேநீர் (草本茶 - 进口)</h3>
+                        <div class="product-price">¥ 339</div>
+                        <div class="product-tags">
+                            <span class="product-tag">进口</span>
+                            <span class="product-tag">草本</span>
+                            <span class="product-tag">茗茶</span>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="button button-full-width">立即购买</a>
+                        </div>
+                    </div>
+
+                     <div class="product-card">
+                        <div class="product-image" style="background-image: url('placeholder-product8.jpg');"></div>
+                        <h3 class="product-title">轻断食能量棒 (混合口味)</h3>
+                        <div class="product-price">¥ 198</div>
+                        <div class="product-tags">
+                            <span class="product-tag">能量棒</span>
+                            <span class="product-tag">代餐</span>
+                            <span class="product-tag">便捷</span>
+                        </div>
+                        <div class="product-actions">
+                            <a href="#" class="button button-full-width">立即购买</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="material-icons nav-icon">home</span>
+                <span class="nav-text">首页</span>
+            </a>
+            <a href="community.html" class="nav-item">
+                <span class="material-icons nav-icon">forum</span>
+                <span class="nav-text">社区</span>
+            </a>
+            <a href="tools.html" class="nav-item">
+                <span class="material-icons nav-icon">build</span>
+                <span class="nav-text">工具</span>
+            </a>
+            <a href="knowledge.html" class="nav-item">
+                <span class="material-icons nav-icon">school</span>
+                <span class="nav-text">知识</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="material-icons nav-icon">person</span>
+                <span class="nav-text">我的</span>
+            </a>
+        </nav>
+
+    </div>
+</div>
+
+</body>
+</html>
