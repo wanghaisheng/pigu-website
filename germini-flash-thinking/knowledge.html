@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库 - 轻断食养生平台</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            /* 颜色变量 (与 index.html 相同) */
+            /* ... (省略颜色变量定义，与 index.html 保持一致) ... */
+
+            /* 主色调 */
+            --primary: #6D9788; /* 青绿色 */
+            --primary-dark: #527A6B;
+            --primary-light: #87B3A3;
+            /* 辅助色 */
+            --secondary: #4A638C; /* 黛蓝色 */
+            --secondary-light: #6B89B3;
+            --accent-yellow: #F3E9D2; /* 宣纸黄 */
+            --accent-amber: #FFB300; /* 琥珀色 */
+            --data-blue: #2E5266; /* 深蓝色，数据图表常用 */
+            --neon-green: #00FF85;
+
+            /* 暗色背景 */
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --bg-card-hover: #252525;
+            --bg-light-grey: #282828; /* 比card稍亮的灰色，用于分割线等 */
+
+
+            /* 文本颜色 */
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --text-disabled: rgba(255, 255, 255, 0.3);
+            --text-amber: #FFB300; /* 琥珀色文本，用于警示 */
+
+
+            /* 边框与阴影 */
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-medium: rgba(255, 255, 255, 0.2);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-neon-green: 0 0 15px rgba(0, 255, 133, 0.5);
+
+            /* 间距 */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            --space-xxxl: 64px;
+
+            /* 圆角 */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* 字号 */
+            --font-size-sm: 12px;
+            --font-size-md: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 20px;
+            --font-size-xxl: 24px;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit; /* 继承父元素颜色 */
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px; /* 模拟手机屏幕宽度 */
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
+            overflow: hidden; /* 防止内容超出时出现滚动条 */
+        }
+
+        .screen {
+            width: 100%; /* 屏幕宽度占满容器 */
+            height: auto; /* 内容自适应高度 */
+            overflow-y: auto; /* 允许内容在屏幕内滚动 */
+            -webkit-overflow-scrolling: touch; /* 启用iOS的流畅滚动 */
+            padding-bottom: 80px; /* 底部导航栏高度 */
+        }
+
+        /* 顶部导航栏 */
+        .top-nav {
+            background-color: var(--bg-card);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky; /* 粘性定位 */
+            top: 0;
+            z-index: 100; /* 确保在内容之上 */
+        }
+
+        .top-nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .top-nav-menu-item {
+            font-weight: 500;
+            color: var(--text-primary);
+            padding: var(--space-sm) 0;
+            border-bottom: 2px solid transparent; /* 默认透明边框 */
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .top-nav-menu-item.active, .top-nav-menu-item:hover {
+            border-color: var(--primary); /* 激活或悬停时显示边框 */
+        }
+
+
+        /* 知识库内容 */
+        .knowledge-content {
+            padding: var(--space-lg);
+        }
+
+        .section-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        .section-title .material-icons {
+            font-size: var(--font-size-xxl);
+            vertical-align: middle;
+        }
+
+        .knowledge-categories {
+            display: flex;
+            overflow-x: auto; /* 水平滚动 */
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-sm); /* 底部内边距，防止滚动条遮挡文字 */
+        }
+
+        .knowledge-category {
+            background-color: var(--bg-card);
+            color: var(--text-secondary);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            white-space: nowrap; /* 防止文字换行 */
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .knowledge-category.active {
+            background-color: var(--primary);
+            color: var(--text-primary);
+            border-color: var(--primary);
+        }
+        .knowledge-category:hover {
+            background-color: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+
+
+        .knowledge-list {
+            display: grid;
+            grid-template-columns: 1fr; /* 单列布局 */
+            gap: var(--space-md);
+        }
+
+        .knowledge-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+            cursor: pointer; /* Add cursor pointer */
+        }
+        .knowledge-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .knowledge-card-title {
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+            line-height: 1.4;
+        }
+
+        .knowledge-card-description {
+            color: var(--text-secondary);
+            font-size: var(--font-size-md);
+            line-height: 1.5;
+            margin-bottom: var(--space-md);
+            overflow: hidden; /* Hide overflowing text */
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Limit to 2 lines */
+            -webkit-box-orient: vertical;
+        }
+
+        .knowledge-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--space-md);
+            border-top: 1px dashed var(--border-light);
+            padding-top: var(--space-md);
+            font-size: var(--font-size-sm);
+            color: var(--text-tertiary);
+        }
+        .knowledge-card-footer span {
+            margin-right: var(--space-lg);
+        }
+        .knowledge-card-footer .material-icons {
+            font-size: var(--font-size-md);
+            vertical-align: middle;
+            margin-right: var(--space-xs);
+        }
+
+        /* 展开阅读更多 */
+        .knowledge-card.expanded .knowledge-card-description {
+            -webkit-line-clamp: unset; /* Remove line clamp when expanded */
+            display: block; /* Display all text */
+        }
+
+        .read-more-button {
+            color: var(--primary);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            margin-top: var(--space-sm);
+            display: none; /* Initially hidden */
+        }
+
+        .knowledge-card .read-more-button {
+            display: block; /* Show read more button by default */
+        }
+
+        .knowledge-card.expanded .read-more-button {
+            display: none; /* Hide read more button when expanded */
+        }
+        .read-less-button {
+            color: var(--primary);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            margin-top: var(--space-sm);
+            display: none; /* Initially hidden */
+        }
+
+        .knowledge-card.expanded .read-less-button {
+            display: block; /* Show read less button when expanded */
+        }
+
+        /* 古籍交互阅读容器 (示例，可以根据具体需求调整样式) */
+        .ancient-text-section {
+            margin-top: var(--space-lg);
+            padding: var(--space-lg);
+            background-color: var(--bg-card-hover);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            display: none; /* Initially hidden */
+        }
+        .knowledge-card.expanded .ancient-text-section {
+            display: block; /* Show when card is expanded */
+        }
+
+        .ancient-text-title {
+            font-weight: bold;
+            margin-bottom: var(--space-md);
+        }
+
+        .ancient-text-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 200px; /* Adjust as needed */
+            background-color: var(--bg-light-grey);
+            border-radius: var(--radius-md);
+            margin-top: var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            font-size: var(--font-size-lg);
+        }
+
+
+        /* 底部固定导航栏 (与 index.html 相同) */
+        .bottom-nav {
+            background-color: var(--bg-card);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-sm) 0;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-tertiary);
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-icon {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-xs);
+        }
+        .nav-text {
+            font-size: var(--font-size-sm);
+        }
+
+
+        /* 通用按钮样式 (与 index.html 相同) */
+        .button {
+            display: inline-block;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            background-color: var(--primary);
+            color: var(--text-primary);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .button.secondary {
+            background-color: var(--secondary);
+        }
+
+        .button.outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .button.outline.secondary {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .button-full-width {
+            display: block;
+            width: 100%;
+        }
+
+        /* Material Icons */
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px; /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
+        /* 辅助类 */
+        .text-center { text-align: center; }
+        .mb-sm { margin-bottom: var(--space-sm); }
+        .mb-md { margin-bottom: var(--space-md); }
+        .mb-lg { margin-bottom: var(--space-lg); }
+        .mb-xl { margin-bottom: var(--space-xl); }
+        .mt-md { margin-top: var(--space-md); }
+        .mt-lg { margin-top: var(--space-lg); }
+        .text-amber { color: var(--text-amber); }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="screen" id="knowledge-screen">
+        <!-- 顶部导航 -->
+        <div class="top-nav">
+            <div class="top-nav-menu">
+                <a href="index.html" class="top-nav-menu-item">我的目标</a>
+                <a href="products.html" class="top-nav-menu-item">辟谷产品</a>
+                <a href="tools.html" class="top-nav-menu-item">养生工具</a>
+                <div class="top-nav-menu-item active">知识库</div>
+                <a href="community.html" class="top-nav-menu-item">社区</a>
+            </div>
+        </div>
+
+        <!-- 知识库内容 -->
+        <div class="knowledge-content">
+            <section>
+                <h2 class="section-title"><span class="material-icons">school</span> 辟谷知识百科</h2>
+
+                <div class="knowledge-categories">
+                    <div class="knowledge-category active">精选推荐</div>
+                    <div class="knowledge-category">辟谷方法</div>
+                    <div class="knowledge-category">辟谷食谱</div>
+                    <div class="knowledge-category">常见问题</div>
+                    <div class="knowledge-category">进阶知识</div>
+                </div>
+
+                <div class="knowledge-list">
+                    <!-- 知识卡片 1 -->
+                    <div class="knowledge-card" data-card-id="1">
+                        <h3 class="knowledge-card-title">辟谷期间的饮水指南：科学补水，保障健康</h3>
+                        <p class="knowledge-card-description">详细介绍辟谷期间如何正确饮水，包括饮水量、饮水时间、水类型选择等，避免脱水和电解质紊乱。在辟谷期间，饮水至关重要，它不仅维持身体基本功能，还能辅助身体排毒。但是，饮水并非多多益善，过量饮水也可能导致水中毒。本指南将为您详细解读辟谷期间的科学饮水方法，确保您在健康辟谷的同时，也能保持身体的水分平衡。</p>
+                        <div class="knowledge-card-footer">
+                            <span><span class="material-icons">local_drink</span> 辟谷方法</span>
+                            <span><span class="material-icons">schedule</span> 2小时前</span>
+                            <span><span class="material-icons">visibility</span> 892</span>
+                        </div>
+                        <div class="read-more-button">阅读更多</div>
+                        <div class="read-less-button">收起</div>
+
+                        <!-- 古籍交互阅读示例 (可以放在第一个卡片或其他合适的卡片) -->
+                        <div class="ancient-text-section">
+                            <h3 class="ancient-text-title">《黄帝内经》节选</h3>
+                            <div class="ancient-text-content">
+                                <p>“...不食五谷，令人神明而寿。”</p>
+                                <p><strong>白话注解：</strong> 不吃五谷杂粮，可以使人精神清明，延年益寿。</p>
+                                <div class="video-placeholder">
+                                    <span class="material-icons">play_circle_outline</span>
+                                    中医师解读 (占位符)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 知识卡片 2 -->
+                    <div class="knowledge-card" data-card-id="2">
+                        <h3 class="knowledge-card-title">断食 ≠ 绝食：轻断食与长期断食的区别</h3>
+                        <p class="knowledge-card-description">解析轻断食、间歇性断食与长期辟谷的定义、原理和适用人群，强调科学辟谷的重要性，避免极端节食。很多人对断食存在误解，认为断食就是绝食，这对健康有害。实际上，科学的断食，如轻断食和间歇性断食，不仅不会损害健康，反而有诸多益处。本文将为您详细区分轻断食、间歇性断食与长期辟谷，帮助您正确认识断食，科学辟谷。</p>
+                        <div class="knowledge-card-footer">
+                            <span><span class="material-icons">biotech</span> 辟谷方法</span>
+                            <span><span class="material-icons">schedule</span> 1天前</span>
+                            <span><span class="material-icons">visibility</span> 1543</span>
+                        </div>
+                        <div class="read-more-button">阅读更多</div>
+                        <div class="read-less-button">收起</div>
+                    </div>
+
+                    <!-- 知识卡片 3 -->
+                    <div class="knowledge-card" data-card-id="3">
+                        <h3 class="knowledge-card-title">7日轻断食食谱示例：营养均衡，美味又健康</h3>
+                        <p class="knowledge-card-description">提供一份为期7天的轻断食食谱，包含早中晚三餐搭配建议，食材清单和制作方法，确保辟谷期间营养摄入均衡。辟谷并不意味着完全不进食，科学的轻断食可以在保证基本营养的前提下，达到养生效果。本食谱为您精心设计了一份为期7天的轻断食菜单，既能满足您的味蕾，又能确保营养均衡，让您在享受美食的同时，轻松达成健康目标。</p>
+                        <div class="knowledge-card-footer">
+                            <span><span class="material-icons">restaurant</span> 辟谷食谱</span>
+                            <span><span class="material-icons">schedule</span> 3天前</span>
+                            <span><span class="material-icons">visibility</span> 2210</span>
+                        </div>
+                         <div class="read-more-button">阅读更多</div>
+                        <div class="read-less-button">收起</div>
+                    </div>
+
+                    <!-- 更多知识卡片... -->
+                    <div class="knowledge-card" data-card-id="4">
+                        <h3 class="knowledge-card-title">辟谷期间出现饥饿感？5个小技巧帮你轻松应对</h3>
+                        <p class="knowledge-card-description">总结辟谷期间应对饥饿感的实用技巧，如饮用柠檬水、冥想放松、适量运动等，助您舒适度过辟谷期。饥饿感是辟谷过程中常见的挑战，但并非不可战胜。本文为您总结了5个简单实用的技巧，如饮用柠檬水、进行冥想放松、进行适量运动等，帮助您轻松应对饥饿感，舒适度过辟谷期，让您的辟谷之旅更加顺畅。</p>
+                        <div class="knowledge-card-footer">
+                            <span><span class="material-icons">help_outline</span> 常见问题</span>
+                            <span><span class="material-icons">schedule</span> 1周前</span>
+                            <span><span class="material-icons">visibility</span> 987</span>
+                        </div>
+                         <div class="read-more-button">阅读更多</div>
+                        <div class="read-less-button">收起</div>
+                    </div>
+                     <div class="knowledge-card" data-card-id="5">
+                        <h3 class="knowledge-card-title">深度辟谷的文化内涵：探索身心合一的境界</h3>
+                        <p class="knowledge-card-description">从文化和哲学的角度，探讨深度辟谷的意义，引导用户理解辟谷不仅仅是生理行为，更是一种身心修行。深度辟谷不仅仅是一种生理上的断食，更蕴含着丰富的文化和哲学内涵。它是一种身心修行的方式，帮助我们探索身心合一的境界。本文将从文化和哲学的角度，深入探讨深度辟谷的意义，引导您理解辟谷的深层价值，体验身心和谐的境界。</p>
+                        <div class="knowledge-card-footer">
+                            <span><span class="material-icons">psychology</span> 进阶知识</span>
+                            <span><span class="material-icons">schedule</span> 2周前</span>
+                            <span><span class="material-icons">visibility</span> 765</span>
+                        </div>
+                         <div class="read-more-button">阅读更多</div>
+                        <div class="read-less-button">收起</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="material-icons nav-icon">home</span>
+                <span class="nav-text">首页</span>
+            </a>
+            <a href="community.html" class="nav-item">
+                <span class="material-icons nav-icon">forum</span>
+                <span class="nav-text">社区</span>
+            </a>
+            <a href="tools.html" class="nav-item">
+                <span class="material-icons nav-icon">build</span>
+                <span class="nav-text">工具</span>
+                </a>
+            <a href="knowledge.html" class="nav-item active">
+                <span class="material-icons nav-icon">school</span>
+                <span class="nav-text">知识</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="material-icons nav-icon">person</span>
+                <span class="nav-text">我的</span>
+            </a>
+        </nav>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const knowledgeCards = document.querySelectorAll('.knowledge-card');
+
+        knowledgeCards.forEach(card => {
+            const description = card.querySelector('.knowledge-card-description');
+            const readMoreButton = card.querySelector('.read-more-button');
+            const readLessButton = card.querySelector('.read-less-button');
+
+            readMoreButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                card.classList.add('expanded');
+                readMoreButton.style.display = 'none';
+                readLessButton.style.display = 'block';
+                description.style.webkitLineClamp = 'unset'; // Remove line clamp
+                description.style.display = 'block'; // Show all text
+            });
+
+            readLessButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                card.classList.remove('expanded');
+                readLessButton.style.display = 'none';
+                readMoreButton.style.display = 'block';
+                description.style.webkitLineClamp = '2'; // Re-apply line clamp
+                description.style.display = '-webkit-box'; // Restore -webkit-box display
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
