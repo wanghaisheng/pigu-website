@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社区 - 轻断食养生平台</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            /* 颜色变量 (与 index.html 相同) */
+            /* ... (省略颜色变量定义，与 index.html 保持一致) ... */
+
+            /* 主色调 */
+            --primary: #6D9788; /* 青绿色 */
+            --primary-dark: #527A6B;
+            --primary-light: #87B3A3;
+            /* 辅助色 */
+            --secondary: #4A638C; /* 黛蓝色 */
+            --secondary-light: #6B89B3;
+            --accent-yellow: #F3E9D2; /* 宣纸黄 */
+            --accent-amber: #FFB300; /* 琥珀色 */
+            --data-blue: #2E5266; /* 深蓝色，数据图表常用 */
+            --neon-green: #00FF85;
+
+            /* 暗色背景 */
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --bg-card-hover: #252525;
+            --bg-light-grey: #282828; /* 比card稍亮的灰色，用于分割线等 */
+
+
+            /* 文本颜色 */
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --text-disabled: rgba(255, 255, 255, 0.3);
+            --text-amber: #FFB300; /* 琥珀色文本，用于警示 */
+
+
+            /* 边框与阴影 */
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-medium: rgba(255, 255, 255, 0.2);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-neon-green: 0 0 15px rgba(0, 255, 133, 0.5);
+
+            /* 间距 */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            --space-xxxl: 64px;
+
+            /* 圆角 */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* 字号 */
+            --font-size-sm: 12px;
+            --font-size-md: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 20px;
+            --font-size-xxl: 24px;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit; /* 继承父元素颜色 */
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px; /* 模拟手机屏幕宽度 */
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
+            overflow: hidden; /* 防止内容超出时出现滚动条 */
+        }
+
+        .screen {
+            width: 100%; /* 屏幕宽度占满容器 */
+            height: auto; /* 内容自适应高度 */
+            overflow-y: auto; /* 允许内容在屏幕内滚动 */
+            -webkit-overflow-scrolling: touch; /* 启用iOS的流畅滚动 */
+            padding-bottom: 80px; /* 底部导航栏高度 */
+        }
+
+        /* 顶部导航栏 */
+        .top-nav {
+            background-color: var(--bg-card);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky; /* 粘性定位 */
+            top: 0;
+            z-index: 100; /* 确保在内容之上 */
+        }
+
+        .top-nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .top-nav-menu-item {
+            font-weight: 500;
+            color: var(--text-primary);
+            padding: var(--space-sm) 0;
+            border-bottom: 2px solid transparent; /* 默认透明边框 */
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .top-nav-menu-item.active, .top-nav-menu-item:hover {
+            border-color: var(--primary); /* 激活或悬停时显示边框 */
+        }
+
+
+        /* 社区内容 */
+        .community-content {
+            padding: var(--space-lg);
+        }
+
+        .section-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        .section-title .material-icons {
+            font-size: var(--font-size-xxl);
+            vertical-align: middle;
+        }
+
+        .community-tabs {
+            display: flex;
+            overflow-x: auto; /* 水平滚动 */
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-sm); /* 底部内边距，防止滚动条遮挡文字 */
+        }
+
+        .community-tab {
+            background-color: var(--bg-card);
+            color: var(--text-secondary);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            white-space: nowrap; /* 防止文字换行 */
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .community-tab.active {
+            background-color: var(--primary);
+            color: var(--text-primary);
+            border-color: var(--primary);
+        }
+        .community-tab:hover {
+            background-color: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+
+
+        .post-list {
+            display: grid;
+            grid-template-columns: 1fr; /* 单列布局 */
+            gap: var(--space-md);
+        }
+
+        .post-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background-color: var(--bg-light-grey); /* 占位符头像背景色 */
+            margin-right: var(--space-md);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .post-author-info {
+            flex: 1;
+        }
+
+        .post-author-name {
+            font-weight: 500;
+            margin-bottom: var(--space-xs);
+        }
+
+        .post-date {
+            font-size: var(--font-size-sm);
+            color: var(--text-tertiary);
+        }
+
+        .post-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 180px; /* 固定图片高度 */
+            background-color: var(--bg-light-grey); /* 占位符图片背景色 */
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--space-md);
+            border-top: 1px dashed var(--border-light);
+            padding-top: var(--space-md);
+            color: var(--text-tertiary);
+        }
+
+        .post-action-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: color 0.2s ease; /* Add transition for smooth hover effect */
+        }
+        .post-action-item:hover {
+            color: var(--text-primary);
+        }
+        .post-action-item.liked {
+            color: var(--primary); /* Highlight liked icon */
+        }
+        .post-action-item.commented {
+            color: var(--secondary); /* Highlight commented icon */
+        }
+        .post-action-item.shared {
+            color: var(--accent-amber); /* Highlight shared icon */
+        }
+
+        .post-action-icon {
+            font-size: var(--font-size-md);
+            margin-right: var(--space-xs);
+        }
+
+        .post-summary {
+            margin-top: var(--space-md);
+            border-top: 1px dashed var(--border-light);
+            padding-top: var(--space-md);
+            color: var(--text-tertiary);
+        }
+
+        /* 底部固定导航栏 (与 index.html 相同) */
+        .bottom-nav {
+            background-color: var(--bg-card);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-sm) 0;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-tertiary);
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-icon {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-xs);
+        }
+        .nav-text {
+            font-size: var(--font-size-sm);
+        }
+
+
+        /* 通用按钮样式 (与 index.html 相同) */
+        .button {
+            display: inline-block;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            background-color: var(--primary);
+            color: var(--text-primary);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .button.secondary {
+            background-color: var(--secondary);
+        }
+
+        .button.outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .button.outline.secondary {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .button-full-width {
+            display: block;
+            width: 100%;
+        }
+
+        /* Material Icons */
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px; /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
+        /* 辅助类 */
+        .text-center { text-align: center; }
+        .mb-sm { margin-bottom: var(--space-sm); }
+        .mb-md { margin-bottom: var(--space-md); }
+        .mb-lg { margin-bottom: var(--space-lg); }
+        .mb-xl { margin-bottom: var(--space-xl); }
+        .mt-md { margin-top: var(--space-md); }
+        .mt-lg { margin-top: var(--space-lg); }
+        .text-amber { color: var(--text-amber); }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="screen" id="community-screen">
+        <!-- 顶部导航 -->
+        <div class="top-nav">
+            <div class="top-nav-menu">
+                <a href="index.html" class="top-nav-menu-item">我的目标</a>
+                <a href="products.html" class="top-nav-menu-item">辟谷产品</a>
+                <a href="tools.html" class="top-nav-menu-item">养生工具</a>
+                <a href="knowledge.html" class="top-nav-menu-item">知识库</a>
+                <div class="top-nav-menu-item active">社区</div>
+            </div>
+        </div>
+
+        <!-- 社区内容 -->
+        <div class="community-content">
+            <section>
+                <h2 class="section-title"><span class="material-icons">forum</span> 社区互动</h2>
+
+                <div class="community-tabs">
+                    <div class="community-tab active">推荐</div>
+                    <div class="community-tab">话题小组</div>
+                    <div class="community-tab">用户日记</div>
+                    <div class="community-tab">线下活动</div>
+                </div>
+
+                <section class="mb-xl">
+                    <h3 class="section-title" style="margin-bottom: var(--space-md);"><span class="material-icons">create</span>  发布新帖</h3>
+                    <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-md);">
+                        <input type="text" id="post-topic-input" placeholder="想聊点什么？" style="background-color: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: var(--space-md); flex-grow: 1;">
+                        <button class="button primary" id="generate-post-button">生成想法</button>
+                    </div>
+                    <div style="margin-bottom: var(--space-md);">
+                        <label for="post-tone-select" style="display: block; margin-bottom: var(--space-sm);">选择帖子语气:</label>
+                        <select id="post-tone-select" style="background-color: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: var(--space-md); width: 100%;">
+                            <option value="neutral">中性</option>
+                            <option value="informative">信息性</option>
+                            <option value="humorous">幽默</option>
+                            <option value="motivational">励志</option>
+                            <option value="question">提问</option>
+                        </select>
+                    </div>
+                    <div id="post-idea-container" style="background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: var(--space-lg); display: none;">
+                        <h4 style="margin-top: 0; margin-bottom: var(--space-md);">帖子想法:</h4>
+                        <p id="post-idea-text" style="color: var(--text-secondary);"></p>
+                    </div>
+                </section>
+
+                <div class="post-list">
+                    <!-- 帖子卡片 1 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background-image: url('user-avatar-placeholder.svg');"></div>
+                            <div class="post-author-info">
+                                <div class="post-author-name">养生小达人</div>
+                                <div class="post-date">1小时前</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            分享一下我最近尝试的3日果蔬轻断食，感觉身体轻松了很多，皮肤也变好了！有没有小伙伴一起交流经验？
+                        </div>
+                        <div class="post-image" style="background-image: url('post-image-placeholder.svg');"></div>
+                        <div class="post-actions">
+                            <div class="post-action-item">
+                                <span class="material-icons post-action-icon">thumb_up</span> 128
+                            </div>
+                            <div class="post-action-item">
+                                <span class="material-icons post-action-icon">comment</span> 32
+                            </div>
+                            <div class="post-action-item">
+                                <span class="material-icons post-action-icon">share</span> 分享
+                            </div>
+                        </div>
+                        <div class="post-summary" style="display:none; margin-top: var(--space-md); border-top: 1px dashed var(--border-light); padding-top: var(--space-md); color: var(--text-tertiary);"></div>
+                        <div class="post-actions" style="border-top: none; padding-top: 0; justify-content: flex-end;">
+                            <a href="#" class="button outline secondary summarize-button" style="font-size: var(--font-size-sm);">总结帖子</a>
+                        </div>
+                    </div>
+
+                    <!-- 帖子卡片 2 -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background-image: url('user-avatar-placeholder.svg');"></div>
+                            <div class="post-author-info">
+                                <div class="post-author-name">禅意生活家</div>
+                                <div class="post-date">昨天</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            秋分将至，正是辟谷好时节。分享一组适合秋季的养生冥想音乐，愿大家在静心中感受身体的平和与能量。
+                        </div>
+                        <div class="post-actions">
+                            <div class="post-action-item">
+                                <span class="material-icons post-action-icon">thumb_up</span> 95
+                            </div>
+                            <div class="post-action-item">
+                                <span class="material-icons post-action-icon">comment</span> 15
+                            </div>
+                            <div class="post-action-item">
+                                <span class="material-icons post-action-icon">share</span> 分享
+                            </div>
+                        </div>
+                        <div class="post-summary" style="display:none; margin-top: var(--space-md); border-top: 1px dashed var(--border-light); padding-top: var(--space-md); color: var(--text-tertiary);"></div>
+                        <div class="post-actions" style="border-top: none; padding-top: 0; justify-content: flex-end;">
+                            <a href="#" class="button outline secondary summarize-button" style="font-size: var(--font-size-sm);">总结帖子</a>
+                        </div>
+                    </div>
+
+                    <!-- 更多帖子卡片... -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background-image: url('user-avatar-placeholder.svg');"></div>
+                            <div class="post-author-info">
+                                <div class="post-author-name">美食探索者</div>
+                                <div class="post-date">3天前</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            辟谷期间也能享受美味？试试这款低卡冬瓜薏米水，清爽解腻，做法简单，附详细食谱！
+                        </div>
+                         <div class="post-image" style="background-image: url('post-image-placeholder.svg');"></div>
+                        <div class="post-actions">
+                            <div class="post-action-item">
+                                <span class="material-icons post-action-icon">thumb_up</span> 152
+                            </div>
+                            <div class="post-action-item">
+                                <span class="material-icons post-action-icon">comment</span> 48
+                            </div>
+                            <div class="post-action-item">
+                                <span class="material-icons post-action-icon">share</span> 分享
+                            </div>
+                        </div>
+                        <div class="post-summary" style="display:none; margin-top: var(--space-md); border-top: 1px dashed var(--border-light); padding-top: var(--space-md); color: var(--text-tertiary);"></div>
+                        <div class="post-actions" style="border-top: none; padding-top: 0; justify-content: flex-end;">
+                            <a href="#" class="button outline secondary summarize-button" style="font-size: var(--font-size-sm);">总结帖子</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="material-icons nav-icon">home</span>
+                <span class="nav-text">首页</span>
+            </a>
+            <a href="community.html" class="nav-item active">
+                <span class="material-icons nav-icon">forum</span>
+                <span class="nav-text">社区</span>
+            </a>
+            <a href="tools.html" class="nav-item">
+                <span class="material-icons nav-icon">build</span>
+                <span class="nav-text">工具</span>
+            </a>
+            <a href="knowledge.html" class="nav-item">
+                <span class="material-icons nav-icon">school</span>
+                <span class="nav-text">知识</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <span class="material-icons nav-icon">person</span>
+                <span class="nav-text">我的</span>
+            </a>
+        </nav>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const generatePostButton = document.getElementById('generate-post-button');
+        const postTopicInput = document.getElementById('post-topic-input');
+        const postIdeaContainer = document.getElementById('post-idea-container');
+        const postIdeaText = document.getElementById('post-idea-text');
+        const postToneSelect = document.getElementById('post-tone-select');
+        let conversationHistory = [];
+
+        generatePostButton.addEventListener('click', async function() {
+            const topic = postTopicInput.value;
+            if (!topic) {
+                alert("请输入帖子主题");
+                return;
+            }
+            const tone = postToneSelect.value;
+            const toneText = postToneSelect.options[postToneSelect.selectedIndex].textContent;
+
+
+            generatePostButton.disabled = true;
+            generatePostButton.textContent = "生成中...";
+            postIdeaContainer.style.display = 'none';
+
+            const newMessage = {
+                role: "user",
+                content: `Generate a short, engaging post idea about ${topic} for a health and wellness community forum. The tone of the post should be ${toneText}.`
+            };
+            conversationHistory.push(newMessage);
+            conversationHistory = conversationHistory.slice(-10);
+            const completion = await websim.chat.completions.create({
+                messages: [...conversationHistory],
+            });
+            const idea = completion.content;
+
+            postIdeaText.textContent = idea;
+            postIdeaContainer.style.display = 'block';
+            generatePostButton.disabled = false;
+            generatePostButton.textContent = "生成想法";
+        });
+
+        // Add event listeners for post actions (like, comment, share)
+        document.querySelectorAll('.post-action-item').forEach(item => {
+            item.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default action
+                if (this.classList.contains('liked')) {
+                    this.classList.remove('liked'); // Toggle liked state
+                } else if (this.querySelector('.material-icons').textContent === 'thumb_up') {
+                    this.classList.add('liked');
+                } else if (this.classList.contains('commented')) {
+                    this.classList.remove('commented'); // Toggle commented state
+                } else if (this.querySelector('.material-icons').textContent === 'comment') {
+                    this.classList.add('commented');
+                } else if (this.classList.contains('shared')) {
+                    this.classList.remove('shared'); // Toggle shared state
+                } else if (this.querySelector('.material-icons').textContent === 'share') {
+                    this.classList.add('shared');
+                }
+            });
+        });
+
+        document.querySelectorAll('.summarize-button').forEach(button => {
+            button.addEventListener('click', async function(event) {
+                event.preventDefault();
+                const postCard = this.closest('.post-card');
+                const postContent = postCard.querySelector('.post-content').textContent;
+                const postSummaryElement = postCard.querySelector('.post-summary');
+
+                if (postSummaryElement.style.display === 'block') {
+                    postSummaryElement.style.display = 'none';
+                    this.textContent = '总结帖子';
+                    return;
+                }
+
+                this.textContent = '总结中...';
+                this.disabled = true;
+                const newMessage = {
+                    role: "user",
+                    content: `Summarize the following post content in under 50 words:\n${postContent}`
+                };
+                conversationHistory.push(newMessage);
+                conversationHistory = conversationHistory.slice(-10);
+                const completion = await websim.chat.completions.create({
+                    messages: [...conversationHistory],
+                });
+                const summary = completion.content;
+
+                postSummaryElement.textContent = summary;
+                postSummaryElement.style.display = 'block';
+                this.textContent = '收起总结';
+                this.disabled = false;
+
+            });
+        });
+    });
+</script>
+</body>
+</html>
