@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的 - 轻断食养生平台</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            /* 颜色变量 (与 index.html 相同) */
+            /* ... (省略颜色变量定义，与 index.html 保持一致) ... */
+
+            /* 主色调 */
+            --primary: #6D9788; /* 青绿色 */
+            --primary-dark: #527A6B;
+            --primary-light: #87B3A3;
+            /* 辅助色 */
+            --secondary: #4A638C; /* 黛蓝色 */
+            --secondary-light: #6B89B3;
+            --accent-yellow: #F3E9D2; /* 宣纸黄 */
+            --accent-amber: #FFB300; /* 琥珀色 */
+            --data-blue: #2E5266; /* 深蓝色，数据图表常用 */
+            --neon-green: #00FF85;
+
+            /* 暗色背景 */
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --bg-card-hover: #252525;
+            --bg-light-grey: #282828; /* 比card稍亮的灰色，用于分割线等 */
+
+
+            /* 文本颜色 */
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --text-disabled: rgba(255, 255, 255, 0.3);
+            --text-amber: #FFB300; /* 琥珀色文本，用于警示 */
+
+
+            /* 边框与阴影 */
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-medium: rgba(255, 255, 255, 0.2);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --shadow-neon-green: 0 0 15px rgba(0, 255, 133, 0.5);
+
+            /* 间距 */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            --space-xxxl: 64px;
+
+            /* 圆角 */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* 字号 */
+            --font-size-sm: 12px;
+            --font-size-md: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 20px;
+            --font-size-xxl: 24px;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit; /* 继承父元素颜色 */
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px; /* 模拟手机屏幕宽度 */
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
+            overflow: hidden; /* 防止内容超出时出现滚动条 */
+        }
+
+        .screen {
+            width: 100%; /* 屏幕宽度占满容器 */
+            height: auto; /* 内容自适应高度 */
+            overflow-y: auto; /* 允许内容在屏幕内滚动 */
+            -webkit-overflow-scrolling: touch; /* 启用iOS的流畅滚动 */
+            padding-bottom: 80px; /* 底部导航栏高度 */
+        }
+
+        /* 顶部导航栏 */
+        .top-nav {
+            background-color: var(--bg-card);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky; /* 粘性定位 */
+            top: 0;
+            z-index: 100; /* 确保在内容之上 */
+        }
+
+        .top-nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .top-nav-menu-item {
+            font-weight: 500;
+            color: var(--text-primary);
+            padding: var(--space-sm) 0;
+            border-bottom: 2px solid transparent; /* 默认透明边框 */
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .top-nav-menu-item.active, .top-nav-menu-item:hover {
+            border-color: var(--primary); /* 激活或悬停时显示边框 */
+        }
+
+
+        /* 个人中心内容 */
+        .profile-content {
+            padding: var(--space-lg);
+        }
+
+        .profile-header {
+            background-color: var(--secondary); /* 黛蓝色 */
+            color: var(--text-primary);
+            padding: var(--space-xxl) var(--space-lg);
+            text-align: center;
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-full);
+            background-color: var(--bg-light-grey); /* 占位符头像背景色 */
+            margin-bottom: var(--space-md);
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--text-primary); /* 头像边框 */
+        }
+
+        .profile-name {
+            font-size: var(--font-size-xxl);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .profile-bio {
+            color: var(--text-secondary);
+            font-size: var(--font-size-md);
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: var(--space-xl) 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: var(--font-size-xl);
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: var(--font-size-md);
+            color: var(--text-tertiary);
+        }
+
+        .section-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        .section-title .material-icons {
+            font-size: var(--font-size-xxl);
+            vertical-align: middle;
+        }
+
+        .user-diary-list {
+            display: grid;
+            grid-template-columns: 1fr; /* 单列布局 */
+            gap: var(--space-md);
+        }
+
+        .user-diary-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .diary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline; /* 使日期与标题对齐 */
+            margin-bottom: var(--space-md);
+        }
+
+        .diary-title {
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .diary-date {
+            font-size: var(--font-size-sm);
+            color: var(--text-tertiary);
+        }
+
+        .diary-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .diary-image {
+            width: 100%;
+            height: 150px; /* 固定图片高度 */
+            background-color: var(--bg-light-grey); /* 占位符图片背景色 */
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            background-size: cover;
+            background-position: center;
+        }
+
+
+        /* 底部固定导航栏 (与 index.html 相同) */
+        .bottom-nav {
+            background-color: var(--bg-card);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-sm) 0;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-tertiary);
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-icon {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-xs);
+        }
+        .nav-text {
+            font-size: var(--font-size-sm);
+        }
+
+
+        /* 通用按钮样式 (与 index.html 相同) */
+        .button {
+            display: inline-block;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            background-color: var(--primary);
+            color: var(--text-primary);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .button.secondary {
+            background-color: var(--secondary);
+        }
+
+        .button.outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .button.outline.secondary {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .button-full-width {
+            display: block;
+            width: 100%;
+        }
+
+        /* Material Icons */
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px; /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
+        /* 辅助类 */
+        .text-center { text-align: center; }
+        .mb-sm { margin-bottom: var(--space-sm); }
+        .mb-md { margin-bottom: var(--space-md); }
+        .mb-lg { margin-bottom: var(--space-lg); }
+        .mb-xl { margin-bottom: var(--space-xl); }
+        .mt-md { margin-top: var(--space-md); }
+        .mt-lg { margin-top: var(--space-lg); }
+        .text-amber { color: var(--text-amber); }
+
+
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="screen" id="profile-screen">
+        <!-- 顶部导航 -->
+        <div class="top-nav">
+            <div class="top-nav-menu">
+                <a href="index.html" class="top-nav-menu-item">我的目标</a>
+                <a href="products.html" class="top-nav-menu-item">辟谷产品</a>
+                <a href="tools.html" class="top-nav-menu-item">养生工具</a>
+                <a href="knowledge.html" class="top-nav-menu-item">知识库</a>
+                <a href="community.html" class="top-nav-menu-item active">社区</a>
+            </div>
+        </div>
+
+        <!-- 个人中心内容 -->
+        <div class="profile-content">
+            <header class="profile-header">
+                <div class="profile-avatar" style="background-image: url('user-avatar-placeholder.svg');"></div>
+                <h2 class="profile-name">轻断食用户</h2>
+                <p class="profile-bio">记录养生点滴，分享健康生活</p>
+
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">日记</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">28</div>
+                        <div class="stat-label">关注者</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">56</div>
+                        <div class="stat-label">获赞</div>
+                    </div>
+                </div>
+
+                <div class="mt-lg text-center">
+                    <a href="#" class="button outline">编辑个人资料</a>
+                </div>
+            </header>
+
+            <section>
+                <h2 class="section-title"><span class="material-icons">book</span> 我的辟谷日记</h2>
+
+                <div class="user-diary-list">
+                    <!-- 日记卡片 1 -->
+                    <a href="#" class="user-diary-card">
+                        <div class="diary-header">
+                            <h3 class="diary-title">7日轻断食挑战： Day 3</h3>
+                            <div class="diary-date">昨天</div>
+                        </div>
+                        <div class="diary-content">
+                            今天是轻断食的第三天，身体感觉比前两天适应了一些，饥饿感有所减轻。早上喝了一杯蔬果汁，中午吃了一份蔬菜沙拉，下午感觉精力还不错，继续加油！
+                        </div>
+                        <div class="diary-image" style="background-image: url('placeholder-diary1.jpg');"></div>
+                    </a>
+
+                    <!--あげ记卡片 2 -->
+                    <a href="#" class="user-diary-card">
+                        <div class="diary-header">
+                            <h3 class="diary-title">辟谷初体验：开启健康新旅程</h3>
+                            <div class="diary-date">3天前</div>
+                        </div>
+                        <div class="diary-content">
+                            第一次尝试辟谷，选择了16/8轻断食法。刚开始有点不适应，但是为了健康，我要坚持下去！期待身体和精神上的积极变化。
+                        </div>
+                        <div class="diary-image" style="background-image: url('placeholder-diary2.jpg');"></div>
+                    </a>
+
+                    <!-- 更多日记卡片... -->
+                     <a href="#" class="user-diary-card">
+                        <div class="diary-header">
+                            <h3 class="diary-title">秋季养生：我的银耳百合羹食谱</h3>
+                            <div class="diary-date">1周前</div>
+                        </div>
+                        <div class="diary-content">
+                            秋季干燥，润肺养颜很重要。分享一款自己做的银耳百合羹，滋润又美味，适合辟谷期间作为营养补充。
+                        </div>
+                        <div class="diary-image" style="background-image: url('placeholder-diary3.jpg');"></div>
+                    </a>
+                </div>
+                 <div class="mt-md text-center">
+                    <a href="#" class="button outline secondary">查看更多日记</a>
+                </div>
+            </section>
+
+             <section class="mt-xl">
+                <h2 class="section-title"><span class="material-icons">favorite_border</span> 关注与粉丝</h2>
+                <div style="display:flex; justify-content: space-around;">
+                    <div>
+                        <h3 class="section-title" style="justify-content: center; margin-bottom: var(--space-sm);"><span class="material-icons">groups</span> 关注</h3>
+                        <div style="display: flex; gap: var(--space-md); justify-content: center;">
+                            <div class="profile-avatar" style="width: 50px; height: 50px; background-image: url('user-avatar-placeholder.svg');"></div>
+                            <div class="profile-avatar" style="width: 50px; height: 50px; background-image: url('user-avatar-placeholder.svg');"></div>
+                            <div class="profile-avatar" style="width: 50px; height: 50px; background-image: url('user-avatar-placeholder.svg');"></div>
+                        </div>
+                         <div class="mt-md text-center">
+                            <a href="#" class="button outline secondary">查看全部</a>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="section-title" style="justify-content: center; margin-bottom: var(--space-sm);"><span class="material-icons">group</span> 粉丝</h3>
+                        <div style="display: flex; gap: var(--space-md); justify-content: center;">
+                            <div class="profile-avatar" style="width: 50px; height: 50px; background-image: url('user-avatar-placeholder.svg');"></div>
+                            <div class="profile-avatar" style="width: 50px; height: 50px; background-image: url('user-avatar-placeholder.svg');"></div>
+                            <div class="profile-avatar" style="width: 50px; height: 50px; background-image: url('user-avatar-placeholder.svg');"></div>
+                        </div>
+                         <div class="mt-md text-center">
+                            <a href="#" class="button outline secondary">查看全部</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 底部导航栏 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="material-icons nav-icon">home</span>
+                <span class="nav-text">首页</span>
+            </a>
+            <a href="community.html" class="nav-item">
+                <span class="material-icons nav-icon">forum</span>
+                <span class="nav-text">社区</span>
+            </a>
+            <a href="tools.html" class="nav-item">
+                <span class="material-icons nav-icon">build</span>
+                <span class="nav-text">工具</span>
+            </a>
+            <a href="knowledge.html" class="nav-item">
+                <span class="material-icons nav-icon">school</span>
+                <span class="nav-text">知识</span>
+            </a>
+            <a href="profile.html" class="nav-item active">
+                <span class="material-icons nav-icon">person</span>
+                <span class="nav-text">我的</span>
+            </a>
+        </nav>
+
+    </div>
+</div>
+
+</body>
+</html>
