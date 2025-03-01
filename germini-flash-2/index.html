@@ -1,0 +1,1505 @@
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>健康人生 - 您的专属养生平台</title>
+  <style>
+    :root {
+      /* 主色调 */
+      --primary: #8C52FF;
+      --primary-dark: #6E3AD9;
+      --primary-light: #A875FF;
+      --primary-green: #6D9788;
+      --primary-blue: #4A638C;
+      --primary-yellow: #F3E9D2;
+      /* 霓虹色调 */
+      --neon-pink: #FF2E93;
+      --neon-blue: #00E9FF;
+      --neon-green: #00FF85;
+      --neon-yellow: #FFDE59;
+
+      /* 暗色背景 */
+      --bg-dark: #121212;
+      --bg-card: #1E1E1E;
+      --bg-card-hover: #252525;
+
+      /* 文本颜色 */
+      --text-primary: #FFFFFF;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-tertiary: rgba(255, 255, 255, 0.5);
+      --text-disabled: rgba(255, 255, 255, 0.3);
+
+      /* 边框与阴影 */
+      --border-light: rgba(255, 255, 255, 0.1);
+      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.25);
+      --shadow-neon: 0 0 15px rgba(140, 82, 255, 0.5);
+
+      /* 间距 */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+
+      /* 圆角 */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+    }
+
+    /* Reset styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Outfit', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: var(--space-md);
+    }
+
+    /* General container */
+    .app-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xl);
+      justify-content: center;
+      padding-bottom: var(--space-xl);
+    }
+
+    /* App screen styles */
+    .screen {
+      width: 360px;
+      height: 720px;
+      background: var(--bg-dark);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-light);
+    }
+
+    /* Header styles */
+    .header {
+      padding: var(--space-md) var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+
+    .header-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .header-action {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .icon-button {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .icon-button:hover,
+    .icon-button:active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Content area */
+    .content {
+      height: calc(100% - 160px);
+      overflow-y: auto;
+      padding: 0 var(--space-md) var(--space-md);
+    }
+
+    .full-content {
+      height: calc(100% - 80px);
+      overflow-y: auto;
+      padding: 0 var(--space-md) var(--space-md);
+    }
+
+    /* Bottom navigation bar */
+    .nav-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: var(--bg-card);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 1px solid var(--border-light);
+      padding: 0 var(--space-md);
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+    }
+
+    .nav-icon {
+      font-size: 24px;
+      margin-bottom: var(--space-xs);
+    }
+
+    /* Card styles */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-md);
+      border: 1px solid var(--border-light);
+      transition: all 0.2s ease;
+    }
+
+    .card:active {
+      transform: scale(0.98);
+      background: var(--bg-card-hover);
+    }
+
+    /* Feast card styles */
+    .feast-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-md);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-card);
+    }
+
+    .feast-image {
+      height: 150px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feast-image-bg {
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-size: cover;
+      filter: brightness(0.7);
+    }
+
+    .feast-details {
+      padding: var(--space-md);
+    }
+
+    .feast-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-sm);
+    }
+
+    .feast-date {
+      font-size: 14px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+    }
+
+    .feast-icon {
+      margin-right: var(--space-xs);
+    }
+
+    /* Tag container */
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin: var(--space-sm) 0;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-secondary);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+    }
+
+    .tag.highlighted {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Button styles */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .button.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .button.primary:hover,
+    .button.primary:active {
+      background: var(--primary-dark);
+    }
+
+    .button.outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .button.outline:hover,
+    .button.outline:active {
+      background: rgba(140, 82, 255, 0.1);
+    }
+
+    .button.full {
+      width: 100%;
+    }
+
+    .button-icon {
+      margin-right: var(--space-sm);
+    }
+
+    /* Gradient text style */
+    .gradient-text {
+      background: linear-gradient(to right, var(--neon-pink), var(--primary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+
+    /* Section title styles */
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: var(--space-lg) 0 var(--space-md);
+      display: flex;
+      align-items: center;
+    }
+
+    /* Avatar styles */
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-full);
+      object-fit: cover;
+    }
+
+    .avatar.small {
+      width: 36px;
+      height: 36px;
+    }
+
+    .avatar-group {
+      display: flex;
+      margin-left: var(--space-sm);
+    }
+
+    .avatar-group .avatar {
+      margin-left: -10px;
+      border: 2px solid var(--bg-card);
+    }
+
+    .avatar-group .avatar:first-child {
+      margin-left: 0;
+    }
+
+    .users-more {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      margin-left: -10px;
+      border: 2px solid var(--bg-card);
+    }
+
+    /* Search bar styles */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: var(--bg-card);
+      border-radius: var(--radius-full);
+      padding: var(--space-sm) var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .search-icon {
+      color: var(--text-tertiary);
+      margin-right: var(--space-sm);
+    }
+
+    .search-input {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      flex: 1;
+      font-size: 16px;
+    }
+
+    .search-input:focus {
+      outline: none;
+    }
+
+    /* Categories styles */
+    .categories {
+      display: flex;
+      overflow-x: auto;
+      gap: var(--space-sm);
+      padding: var(--space-xs) 0;
+      margin-bottom: var(--space-md);
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-item {
+      padding: var(--space-sm) var(--space-md);
+      background: var(--bg-card);
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+      color: var(--text-secondary);
+    }
+
+    .category-item.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Form group styles */
+    .form-group {
+      margin-bottom: var(--space-lg);
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: var(--space-sm);
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: var(--space-md);
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: 16px;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    textarea.form-input {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-select {
+      width: 100%;
+      padding: var(--space-md);
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: 16px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='18px' height='18px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--space-md) center;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Chat message styles */
+    .chat-message {
+      display: flex;
+      margin-bottom: var(--space-md);
+    }
+
+    .chat-message.outgoing {
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      margin-right: var(--space-sm);
+    }
+
+    .chat-message.outgoing .message-avatar {
+      margin-right: 0;
+      margin-left: var(--space-sm);
+    }
+
+    .message-content {
+      max-width: 70%;
+    }
+
+    .message-bubble {
+      background: var(--bg-card);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-xs);
+    }
+
+    .chat-message.outgoing .message-bubble {
+      background: var(--primary);
+    }
+
+    .message-time {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-align: right;
+    }
+
+    /* Chat input container styles */
+    .chat-input-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--space-md);
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: var(--space-md);
+      background: var(--bg-card);
+      border: none;
+      border-radius: var(--radius-full);
+      color: var(--text-primary);
+      margin-right: var(--space-sm);
+    }
+
+    .chat-input:focus {
+      outline: none;
+    }
+
+    /* Pulse animation */
+    .pulse {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: var(--radius-full);
+      background: var(--neon-green);
+      margin-right: var(--space-sm);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(0, 255, 133, 0.5);
+      }
+
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(0, 255, 133, 0);
+      }
+
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(0, 255, 133, 0);
+      }
+    }
+
+    /* Profile header styles */
+    .profile-header {
+      background: linear-gradient(to right, var(--neon-blue), var(--primary));
+      padding: var(--space-xl) var(--space-md) var(--space-lg);
+      margin: -16px -16px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: var(--radius-full);
+      border: 3px solid white;
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Profile statistics styles */
+    .profile-stats {
+      display: flex;
+      justify-content: space-around;
+      margin: var(--space-md) 0;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    /* Login logo styles */
+    .login-logo {
+      font-size: 36px;
+      font-weight: 800;
+      text-align: center;
+      margin: var(--space-xl) 0;
+    }
+
+    /* Social login styles */
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      margin: var(--space-xl) 0;
+    }
+
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--bg-card);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--text-primary);
+    }
+
+    /* Divider styles */
+    .divider {
+      display: flex;
+      align-items: center;
+      color: var(--text-tertiary);
+      margin: var(--space-xl) 0;
+    }
+
+    .divider:before,
+    .divider:after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border-light);
+    }
+
+    .divider:before {
+      margin-right: var(--space-md);
+    }
+
+    .divider:after {
+      margin-left: var(--space-md);
+    }
+
+    /* Create feast FAB styles */
+    .create-feast-fab {
+      position: absolute;
+      bottom: 100px;
+      right: var(--space-md);
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-full);
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-neon);
+      border: none;
+      font-size: 24px;
+      z-index: 100;
+    }
+
+    /* Material Icons */
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      /* Preferred icon size */
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* 养生APP新增样式 */
+    .ys-container {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #181818;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .ys-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .ys-header h1 {
+      font-size: 2em;
+      color: var(--neon-green);
+    }
+
+    .ys-section {
+      margin-bottom: 30px;
+    }
+
+    .ys-section h2 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .ys-card {
+      background-color: #222;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .ys-button {
+      background-color: var(--primary);
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .ys-button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* 首页动态内容样式 */
+    .dynamic-content {
+      margin-top: 20px;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+
+    .dashboard-item {
+      background-color: #222;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .dashboard-item h3 {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .recommendation {
+      background-color: #222;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .recommendation h3 {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    /* 导航栏新样式 */
+    .ys-nav-bar {
+      background-color: var(--bg-card);
+      padding: 10px;
+      text-align: center;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .ys-nav-item {
+      display: inline-block;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .ys-nav-item:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .ys-nav-item.active {
+      color: var(--primary);
+    }
+
+    /* 产品展示样式 */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .product-card {
+      background-color: #222;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .product-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+
+    /* 工具展示样式 */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: var(--space-md);
+    }
+
+    .tool-card {
+      background-color: var(--bg-card);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+
+    .tool-card h3 {
+      font-size: 1em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .tool-card span {
+      font-size: 2em;
+      color: var(--text-secondary);
+    }
+
+    /* 知识库样式 */
+    .knowledge-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .knowledge-item {
+      background-color: var(--bg-card);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-md);
+      border: 1px solid var(--border-light);
+    }
+
+    .knowledge-item h3 {
+      font-size: 1.2em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .knowledge-item p {
+      color: var(--text-secondary);
+    }
+
+    /* 社区样式 */
+    .community-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .community-item {
+      background-color: var(--bg-card);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-md);
+      border: 1px solid var(--border-light);
+    }
+
+    .community-item h3 {
+      font-size: 1.2em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .community-item p {
+      color: var(--text-secondary);
+    }
+
+    /*目标样式*/
+    .ys-core-entrance {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 5px;
+    }
+
+    .ys-core-entrance a {
+      text-decoration: none;
+      color: var(--text-secondary);
+    }
+
+    /* 调整screen样式使养生APP的样式生效 */
+    .screen.ys-screen {
+      background: #181818;
+    }
+
+    .ys-dropbtn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+    }
+
+    .ys-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .ys-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .ys-dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .ys-dropdown-content a:hover {
+      background-color: #ddd;
+    }
+
+    .ys-dropdown:hover .ys-dropdown-content {
+      display: block;
+    }
+
+    .ys-dropdown:hover .ys-dropbtn {
+      background-color: #3e8e41;
+    }
+
+    .ys-header .ys-core-entrance {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* 知识库样式 */
+    .ys-knowledge-tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: var(--space-md);
+    }
+
+    .ys-knowledge-tab {
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-full);
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .ys-knowledge-tab.active {
+      background-color: var(--primary);
+      color: #fff;
+    }
+
+    .ys-knowledge-search {
+      margin-bottom: var(--space-md);
+    }
+
+    .ys-knowledge-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .ys-knowledge-item {
+      background-color: var(--bg-card);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-md);
+      border: 1px solid var(--border-light);
+    }
+
+    .ys-knowledge-item h3 {
+      font-size: 1.2em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .ys-knowledge-item p {
+      color: var(--text-secondary);
+    }
+
+    /* 社区样式 */
+    .ys-community-post {
+      background-color: var(--bg-card);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-md);
+      border: 1px solid var(--border-light);
+    }
+
+    .ys-community-post h3 {
+      font-size: 1.2em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .ys-community-post p {
+      color: var(--text-secondary);
+    }
+
+    .ys-community-post-meta {
+      display: flex;
+      align-items: center;
+      margin-top: var(--space-md);
+    }
+
+    .ys-community-post-meta img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: var(--space-sm);
+    }
+
+    .ys-community-post-meta span {
+      color: var(--text-tertiary);
+    }
+
+    /* 个人资料页样式 */
+    .ys-profile-badges {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--space-md);
+    }
+
+    .ys-profile-badge {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 var(--space-sm);
+    }
+
+    .ys-profile-settings {
+      margin-top: var(--space-md);
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- 养生 APP 首页 -->
+    <div class="screen ys-screen" id="ys-home">
+      <div class="ys-container">
+        <!--全局导航设计-->
+        <div class="ys-header">
+          <h1>
+            <span class="gradient-text">健康人生</span>
+          </h1>
+          <div class="ys-core-entrance">
+            <!--我的目标-->
+            <div class="ys-dropdown">
+              <button class="ys-dropbtn">我的目标</button>
+              <div class="ys-dropdown-content">
+                <a href="#" onclick="changeHomeContent('调理身体')">调理身体</a>
+                <a href="#" onclick="changeHomeContent('减重塑形')">减重塑形</a>
+                <a href="#" onclick="changeHomeContent('文化体验')">文化体验</a>
+                <a href="#" onclick="changeHomeContent('健康探索')">健康探索</a>
+              </div>
+            </div>
+            <a href="#ys-products" class="ys-nav-item">辟谷产品</a>
+            <a href="#ys-tools" class="ys-nav-item">养生工具</a>
+            <a href="#ys-knowledge" class="ys-nav-item">知识库</a>
+            <a href="#ys-community" class="ys-nav-item">社区</a>
+          </div>
+        </div>
+
+        <!-- 首页动态内容 (根据用户目标动态适配) -->
+        <div class="dynamic-content">
+          <!-- 首页内容根据用户选择的目标进行切换 -->
+          <div id="home-content">
+            <!-- 默认显示内容 -->
+            <div class="dashboard">
+              <div class="dashboard-item">
+                <h3>睡眠质量</h3>
+                <p>良好</p>
+              </div>
+              <div class="dashboard-item">
+                <h3>疲劳程度</h3>
+                <p>轻度</p>
+              </div>
+              <div class="dashboard-item">
+                <h3>消化情况</h3>
+                <p>正常</p>
+              </div>
+            </div>
+            <div class="recommendation">
+              <h3>今日推荐</h3>
+              <p>3日果蔬辟谷 + 经络按摩</p>
+              <p>推荐食谱：银耳百合羹</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部伦理声明 -->
+        <p class="disclaimer">
+          辟谷需结合个人体质，本平台内容不作为医疗建议。
+        </p>
+      </div>
+
+      <!-- 底部导航栏 -->
+      <div class="ys-nav-bar">
+        <a href="#ys-home" class="ys-nav-item active">首页</a>
+        <a href="#ys-products" class="ys-nav-item">产品</a>
+        <a href="#ys-tools" class="ys-nav-item">工具</a>
+        <a href="#ys-knowledge" class="ys-nav-item">知识库</a>
+        <a href="#ys-community" class="ys-nav-item">社区</a>
+      </div>
+    </div>
+
+    <!-- 产品中心 -->
+    <div class="screen ys-screen" id="ys-products">
+      <div class="ys-container">
+        <div class="ys-header">
+          <h1>
+            <span class="gradient-text">辟谷产品中心</span>
+          </h1>
+        </div>
+
+        <h2>推荐产品</h2>
+        <div class="product-grid">
+          <div class="product-card">
+            <img src="https://placehold.co/150x100" alt="代餐粉">
+            <h3>代餐粉</h3>
+            <p>高蛋白，低脂肪</p>
+            <button class="ys-button">购买</button>
+          </div>
+          <div class="product-card">
+            <img src="https://placehold.co/150x100" alt="辟谷丸">
+            <h3>辟谷丸</h3>
+            <p>传统配方，现代工艺</p>
+            <button class="ys-button">购买</button>
+          </div>
+          <div class="product-card">
+            <img src="https://placehold.co/150x100" alt="香道套装">
+            <h3>香道套装</h3>
+            <p>静心冥想，文化体验</p>
+            <button class="ys-button">购买</button>
+          </div>
+        </div>
+
+        <!-- 底部伦理声明 -->
+        <p class="disclaimer">
+          辟谷需结合个人体质，本平台内容不作为医疗建议。
+        </p>
+      </div>
+
+      <!-- 底部导航栏 -->
+      <div class="ys-nav-bar">
+        <a href="#ys-home" class="ys-nav-item">首页</a>
+        <a href="#ys-products" class="ys-nav-item active">产品</a>
+        <a href="#ys-tools" class="ys-nav-item">工具</a>
+        <a href="#ys-knowledge" class="ys-nav-item">知识库</a>
+        <a href="#ys-community" class="ys-nav-item">社区</a>
+      </div>
+    </div>
+
+    <!-- 养生工具 -->
+    <div class="screen ys-screen" id="ys-tools">
+      <div class="ys-container">
+        <div class="ys-header">
+          <h1>
+            <span class="gradient-text">养生工具</span>
+          </h1>
+        </div>
+
+        <h2>实用工具</h2>
+        <div class="tool-grid">
+          <div class="tool-card">
+            <h3>风险评估</h3>
+            <span class="material-icons">medical_information</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部导航栏 -->
+      <div class="ys-nav-bar">
+        <a href="#ys-home" class="ys-nav-item">首页</a>
+        <a href="#ys-products" class="ys-nav-item">产品</a>
+        <a href="#ys-tools" class="ys-nav-item active">工具</a>
+        <a href="#ys-knowledge" class="ys-nav-item">知识库</a>
+        <a href="#ys-community" class="ys-nav-item">社区</a>
+      </div>
+    </div>
+
+    <!-- 知识库 -->
+    <div class="screen ys-screen" id="ys-knowledge">
+      <div class="ys-container">
+        <div class="ys-header">
+          <h1>
+            <span class="gradient-text">知识库</span>
+          </h1>
+        </div>
+
+        <div class="ys-knowledge-tabs">
+          <div class="ys-knowledge-tab active">古籍</div>
+          <div class="ys-knowledge-tab">论文</div>
+          <div class="ys-knowledge-tab">用户手账</div>
+          <div class="ys-knowledge-tab">视频</div>
+        </div>
+
+        <div class="ys-knowledge-search">
+          <input type="text" class="form-input" placeholder="搜索知识...">
+        </div>
+
+        <ul class="ys-knowledge-list">
+          <li class="ys-knowledge-item">
+            <h3>《黄帝内经》节选</h3>
+            <p>
+              解释了阴阳五行学说，以及经络与健康的关系。
+            </p>
+          </li>
+          <li class="ys-knowledge-item">
+            <h3>断食对细胞自噬的影响</h3>
+            <p>
+              研究表明，适度断食可以激活细胞自噬，有益健康。
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 底部导航栏 -->
+      <div class="ys-nav-bar">
+        <a href="#ys-home" class="ys-nav-item">首页</a>
+        <a href="#ys-products" class="ys-nav-item">产品</a>
+        <a href="#ys-tools" class="ys-nav-item">工具</a>
+        <a href="#ys-knowledge" class="ys-nav-item active">知识库</a>
+        <a href="#ys-community" class="ys-nav-item">社区</a>
+      </div>
+    </div>
+
+    <!-- 社区 -->
+    <div class="screen ys-screen" id="ys-community">
+      <div class="ys-container">
+        <div class="ys-header">
+          <h1>
+            <span class="gradient-text">社区</span>
+          </h1>
+        </div>
+
+        <div class="ys-community-post">
+          <h3>今天开始我的辟谷之旅！</h3>
+          <p>
+            希望能通过这次辟谷改善我的睡眠质量，加油！
+          </p>
+          <div class="ys-community-post-meta">
+            <img src="https://placehold.co/30x30" alt="用户头像">
+            <span>@健康达人</span>
+          </div>
+        </div>
+
+        <div class="ys-community-post">
+          <h3>分享一个自制果蔬汁的配方</h3>
+          <p>
+            胡萝卜+苹果+芹菜，口感清爽，营养丰富。
+          </p>
+          <div class="ys-community-post-meta">
+            <img src="https://placehold.co/30x30" alt="用户头像">
+            <span>@养生小能手</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部导航栏 -->
+      <div class="ys-nav-bar">
+        <a href="#ys-home" class="ys-nav-item">首页</a>
+        <a href="#ys-products" class="ys-nav-item">产品</a>
+        <a href="#ys-tools" class="ys-nav-item">工具</a>
+        <a href="#ys-knowledge" class="ys-nav-item">知识库</a>
+        <a href="#ys-community" class="ys-nav-item active">社区</a>
+      </div>
+    </div>
+
+    <!-- 个人资料页 -->
+    <div class="screen ys-screen" id="ys-profile">
+      <div class="ys-container">
+        <div class="ys-header">
+          <h1>
+            <span class="gradient-text">个人资料</span>
+          </h1>
+        </div>
+
+        <img src="https://placehold.co/100x100" alt="用户头像" class="profile-avatar">
+        <h2>用户名</h2>
+
+        <div class="ys-profile-badges">
+          <div class="ys-profile-badge">
+            <span class="material-icons">star</span>
+          </div>
+          <div class="ys-profile-badge">
+            <span class="material-icons">favorite</span>
+          </div>
+          <div class="ys-profile-badge">
+            <span class="material-icons">local_dining</span>
+          </div>
+        </div>
+
+        <div class="ys-profile-settings">
+          <a href="#ys-settings" class="ys-nav-item">设置</a>
+          <a href="#ys-about" class="ys-nav-item">关于</a>
+          <a href="#ys-logout" class="ys-nav-item">退出登录</a>
+        </div>
+      </div>
+
+      <!-- 底部导航栏 -->
+      <div class="ys-nav-bar">
+        <a href="#ys-home" class="ys-nav-item">首页</a>
+        <a href="#ys-products" class="ys-nav-item">产品</a>
+        <a href="#ys-tools" class="ys-nav-item">工具</a>
+        <a href="#ys-knowledge" class="ys-nav-item">知识库</a>
+        <a href="#ys-community" class="ys-nav-item">社区</a>
+      </div>
+    </div>
+
+    <!-- 设置页面 -->
+    <div class="screen ys-screen" id="ys-settings">
+      <div class="ys-container">
+        <div class="ys-header">
+          <h1>
+            <span class="gradient-text">设置</span>
+          </h1>
+        </div>
+
+        <div class="ys-settings-options">
+          <div class="form-group">
+            <label class="form-label">消息通知</label>
+            <select class="form-select">
+              <option>开启</option>
+              <option>关闭</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">语言</label>
+            <select class="form-select">
+              <option>中文</option>
+              <option>English</option>
+            </select>
+          </div>
+
+          <a href="#ys-profile" class="ys-nav-item">返回个人资料</a>
+        </div>
+      </div>
+
+      <!-- 底部导航栏 -->
+      <div class="ys-nav-bar">
+        <a href="#ys-home" class="ys-nav-item">首页</a>
+        <a href="#ys-products" class="ys-nav-item">产品</a>
+        <a href="#ys-tools" class="ys-nav-item">工具</a>
+        <a href="#ys-knowledge" class="ys-nav-item">知识库</a>
+        <a href="#ys-community" class="ys-nav-item">社区</a>
+      </div>
+    </div>
+
+    <!-- 关于页面 -->
+    <div class="screen ys-screen" id="ys-about">
+      <div class="ys-container">
+        <div class="ys-header">
+          <h1>
+            <span class="gradient-text">关于</span>
+          </h1>
+        </div>
+
+        <p>健康人生 - 您的专属养生平台</p>
+        <p>版本号: 1.0.0</p>
+        <p>联系我们: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="067573767669747246637e676b766a632865696b">[email&#160;protected]</a></p>
+        <a href="#ys-profile" class="ys-nav-item">返回个人资料</a>
+      </div>
+
+      <!-- 底部导航栏 -->
+      <div class="ys-nav-bar">
+        <a href="#ys-home" class="ys-nav-item">首页</a>
+        <a href="#ys-products" class="ys-nav-item">产品</a>
+        <a href="#ys-tools" class="ys-nav-item">工具</a>
+        <a href="#ys-knowledge" class="ys-nav-item">知识库</a>
+        <a href="#ys-community" class="ys-nav-item">社区</a>
+      </div>
+    </div>
+
+    <!-- 退出登录页面 -->
+    <div class="screen ys-screen" id="ys-logout">
+      <div class="ys-container">
+        <div class="ys-header">
+          <h1>
+            <span class="gradient-text">退出登录</span>
+          </h1>
+        </div>
+
+        <p>确定要退出登录吗?</p>
+        <a href="#" class="ys-button">确定退出</a>
+        <a href="#ys-profile" class="ys-button">取消</a>
+      </div>
+
+      <!-- 底部导航栏 -->
+      <div class="ys-nav-bar">
+        <a href="#ys-home" class="ys-nav-item">首页</a>
+        <a href="#ys-products" class="ys-nav-item">产品</a>
+        <a href="#ys-tools" class="ys-nav-item">工具</a>
+        <a href="#ys-knowledge" class="ys-nav-item">知识库</a>
+        <a href="#ys-community" class="ys-nav-item">社区</a>
+      </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+      function changeHomeContent(goal) {
+        const homeContentDiv = document.getElementById("home-content");
+        let content = "";
+
+        switch (goal) {
+          case "调理身体":
+            content = `
+              <div class="dashboard">
+                <div class="dashboard-item">
+                  <h3>睡眠质量</h3>
+                  <p>良好</p>
+                </div>
+                <div class="dashboard-item">
+                  <h3>疲劳程度</h3>
+                  <p>轻度</p>
+                </div>
+                <div class="dashboard-item">
+                  <h3>消化情况</h3>
+                  <p>正常</p>
+                </div>
+              </div>
+              <div class="recommendation">
+                <h3>今日推荐</h3>
+                <p>3日果蔬辟谷 + 经络按摩</p>
+                <p>推荐食谱：银耳百合羹</p>
+              </div>
+            `;
+            break;
+          case "减重塑形":
+            content = `
+              <div class="recommendation">
+                <h3>视觉化燃脂沙盘</h3>
+                <p>上传照片，预览体型变化</p>
+              </div>
+              <div class="dashboard">
+                <div class="dashboard-item">
+                  <h3>挑战赛入口</h3>
+                  <p>30天腰围挑战</p>
+                </div>
+              </div>
+              <div class="recommendation">
+                <h3>低卡食谱</h3>
+                <p>冬瓜薏米水</p>
+              </div>
+            `;
+            break;
+          case "文化体验":
+            content = `
+              <div class="recommendation">
+                <h3>今日禅意时刻</h3>
+                <p>终南山实景慢直播</p>
+              </div>
+            `;
+            break;
+          case "健康探索":
+            content = `
+              <div class="recommendation">
+                <h3>新手指南</h3>
+                <p>第一次辟谷必做5件事</p>
+              </div>
+              <div class="dashboard">
+                <div class="dashboard-item">
+                  <h3>安全实验田</h3>
+                  <p>12小时轻断食+果蔬汁</p>
+                </div>
+              </div>
+              <div class="recommendation">
+                <h3>用户实验室</h3>
+                <p>辟谷期间嗅觉敏感度测试</p>
+              </div>
+            `;
+            break;
+          default:
+            break;
+        }
+
+        homeContentDiv.innerHTML = content;
+      }
+    </script>
+  </div>
+</body>
+
+</html>
