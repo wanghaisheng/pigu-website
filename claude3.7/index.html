@@ -1,0 +1,2004 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>辟谷养生 - 健康与传统文化的结合</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 登录页 -->
+        <div class="screen" id="login">
+            <div class="full-content">
+                <div style="height: 20%"></div>
+                <div class="login-logo">
+                    <span class="gradient-text">辟谷养生</span>
+                    <div style="font-size: 16px; color: var(--text-secondary); font-weight: normal; margin-top: 8px;">传统文化与现代健康的平衡</div>
+                </div>
+                <div class="social-login">
+                    <a href="#" class="social-icon">
+                        <span class="material-icons">mail</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <span class="material-icons">chat</span>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <span class="material-icons">language</span>
+                    </a>
+                </div>
+                <div class="divider">或使用邮箱登录</div>
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="邮箱地址">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-input" placeholder="密码">
+                </div>
+                <a href="#home" class="button primary full" style="margin-bottom: var(--space-md);">登录</a>
+                <a href="#register" class="button outline full">注册新账号</a>
+                <div style="text-align: center; margin-top: var(--space-xl); color: var(--text-tertiary);">
+                    登录即表示您同意我们的<br>
+                    <a href="#" style="color: var(--primary);">服务条款</a> 和 <a href="#" style="color: var(--primary);">隐私政策</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 注册页 -->
+        <div class="screen" id="register">
+            <div class="header">
+                <button class="icon-button" onclick="window.location.href='#login'">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+                <div class="header-title">创建账号</div>
+            </div>
+            <div class="full-content">
+                <div class="form-group">
+                    <label class="form-label">您的姓名</label>
+                    <input type="text" class="form-input" placeholder="请输入您的姓名">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">邮箱地址</label>
+                    <input type="email" class="form-input" placeholder="请输入邮箱地址">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">设置密码</label>
+                    <input type="password" class="form-input" placeholder="请设置密码（8位以上）">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">确认密码</label>
+                    <input type="password" class="form-input" placeholder="请再次输入密码">
+                </div>
+                <a href="#onboarding-goal" class="button primary full" style="margin: var(--space-xl) 0;">下一步</a>
+                <div style="text-align: center; margin-top: var(--space-md); color: var(--text-tertiary);">
+                    已有账号？<a href="#login" style="color: var(--primary);">返回登录</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 目标选择页 -->
+        <div class="screen" id="onboarding-goal">
+            <div class="header">
+                <button class="icon-button" onclick="window.location.href='#register'">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+                <div class="header-title">选择您的目标</div>
+            </div>
+            <div class="full-content">
+                <div class="onboarding-progress">
+                    <div class="progress-step active">1</div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step">2</div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step">3</div>
+                </div>
+                <h3 style="text-align: center; margin: var(--space-lg) 0 var(--space-md);">您的养生目标是什么？</h3>
+                <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--space-lg);">
+                    请选择一个主要目标，我们将为您定制个性化体验
+                </p>
+                <div class="goal-options">
+                    <div class="goal-card" onclick="window.location.href='#risk-assessment'">
+                        <div class="goal-icon" style="background-color: var(--goal-body);">
+                            <span class="material-icons">spa</span>
+                        </div>
+                        <h4>调理身体</h4>
+                        <p>改善亚健康，提升身体机能</p>
+                    </div>
+                    <div class="goal-card" onclick="window.location.href='#risk-assessment'">
+                        <div class="goal-icon" style="background-color: var(--goal-shape);">
+                            <span class="material-icons">fitness_center</span>
+                        </div>
+                        <h4>减重塑形</h4>
+                        <p>健康减重，塑造理想体态</p>
+                    </div>
+                </div>
+                <div class="goal-options">
+                    <div class="goal-card" onclick="window.location.href='#risk-assessment'">
+                        <div class="goal-icon" style="background-color: var(--goal-culture);">
+                            <span class="material-icons">auto_stories</span>
+                        </div>
+                        <h4>文化体验</h4>
+                        <p>体验传统文化智慧与修行</p>
+                    </div>
+                    <div class="goal-card" onclick="window.location.href='#risk-assessment'">
+                        <div class="goal-icon" style="background-color: var(--goal-explore);">
+                            <span class="material-icons">explore</span>
+                        </div>
+                        <h4>健康探索</h4>
+                        <p>探索辟谷养生的科学与奥秘</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 风险评估页 -->
+        <div class="screen" id="risk-assessment">
+            <div class="header">
+                <button class="icon-button" onclick="window.location.href='#onboarding-goal'">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+                <div class="header-title">健康风险评估</div>
+            </div>
+            <div class="full-content">
+                <div class="onboarding-progress">
+                    <div class="progress-step completed">1</div>
+                    <div class="progress-line completed"></div>
+                    <div class="progress-step active">2</div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step">3</div>
+                </div>
+                <div class="assessment-intro">
+                    <div class="assessment-icon">
+                        <span class="material-icons">health_and_safety</span>
+                    </div>
+                    <h3>健康风险评估</h3>
+                    <p>为了确保您的辟谷体验安全有效，请回答以下几个问题</p>
+                </div>
+                <div class="assessment-questions">
+                    <div class="assessment-question">
+                        <div class="question-text">1. 您是否有慢性疾病？</div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" name="chronic" value="no"> 没有
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="chronic" value="yes"> 有（高血压、糖尿病等）
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="chronic" value="notsure"> 不确定
+                            </label>
+                        </div>
+                    </div>
+                    <div class="assessment-question">
+                        <div class="question-text">2. 您是否正在服用处方药？</div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" name="medication" value="no"> 没有
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="medication" value="yes"> 有
+                            </label>
+                        </div>
+                    </div>
+                    <div class="assessment-question">
+                        <div class="question-text">3. 您的年龄段？</div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" name="age" value="18-30"> 18-30岁
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="age" value="31-45"> 31-45岁
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="age" value="46-60"> 46-60岁
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="age" value="60+"> 60岁以上
+                            </label>
+                        </div>
+                    </div>
+                    <div class="assessment-question">
+                        <div class="question-text">4. 您是否有辟谷或断食经验？</div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" name="experience" value="no"> 没有经验
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="experience" value="little"> 有少许经验
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="experience" value="rich"> 有丰富经验
+                            </label>
+                        </div>
+                    </div>
+                    <div class="assessment-question">
+                        <div class="question-text">5. 您的身体质量指数(BMI)？</div>
+                        <div class="option-group">
+                            <label class="radio-option">
+                                <input type="radio" name="bmi" value="under18"> 小于18.5（偏瘦）
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="bmi" value="normal"> 18.5-24.9（正常）
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="bmi" value="over25"> 25及以上（偏重）
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="bmi" value="unknown"> 不清楚
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <a href="#resource-package" class="button primary full" style="margin: var(--space-xl) 0;">
+                    下一步
+                </a>
+            </div>
+        </div>
+
+        <!-- 资源包页面 -->
+        <div class="screen" id="resource-package">
+            <div class="header">
+                <button class="icon-button" onclick="window.location.href='#risk-assessment'">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+                <div class="header-title">您的养生资源包</div>
+            </div>
+            <div class="full-content">
+                <div class="onboarding-progress">
+                    <div class="progress-step completed">1</div>
+                    <div class="progress-line completed"></div>
+                    <div class="progress-step completed">2</div>
+                    <div class="progress-line completed"></div>
+                    <div class="progress-step active">3</div>
+                </div>
+                <div class="resource-intro">
+                    <div class="resource-visual">
+                        <div class="resource-glow"></div>
+                        <div class="resource-icon">
+                            <span class="material-icons">card_giftcard</span>
+                        </div>
+                    </div>
+                    <h3>您的专属资源包已准备就绪</h3>
+                    <p>根据您的目标和健康状况，我们为您精心准备了以下资源</p>
+                </div>
+                <div class="resource-cards">
+                    <div class="resource-card">
+                        <div class="resource-card-icon" style="background-color: var(--goal-shape);">
+                            <span class="material-icons">book</span>
+                        </div>
+                        <div class="resource-card-content">
+                            <h4>7天辟谷入门指南</h4>
+                            <p>安全、循序渐进的辟谷方案，适合新手</p>
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-card-icon" style="background-color: var(--primary);">
+                            <span class="material-icons">restaurant</span>
+                        </div>
+                        <div class="resource-card-content">
+                            <h4>辟谷期食谱推荐</h4>
+                            <p>营养均衡的果蔬汁配方与断食建议</p>
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-card-icon" style="background-color: var(--goal-culture);">
+                            <span class="material-icons">science</span>
+                        </div>
+                        <div class="resource-card-content">
+                            <h4>辟谷科学解读</h4>
+                            <p>现代科学视角解析辟谷对身体的影响</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bonus-resource">
+                    <span class="bonus-label">额外奖励</span>
+                    <div class="bonus-card">
+                        <div class="bonus-icon">
+                            <span class="material-icons">workspace_premium</span>
+                        </div>
+                        <div class="bonus-content">
+                            <h4>专业养生顾问服务</h4>
+                            <p>获得7天免费咨询服务，指导您安全开展辟谷</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#home" class="button primary full" style="margin: var(--space-xl) 0;">
+                    开始我的养生之旅
+                </a>
+            </div>
+        </div>
+
+        <!-- 首页（减重塑形） -->
+        <div class="screen" id="home">
+            <div class="header">
+                <div class="header-title">我的目标</div>
+                <div class="header-action">
+                    <button class="icon-button">
+                        <span class="material-icons">notifications</span>
+                    </button>
+                    <button class="icon-button">
+                        <span class="material-icons">person</span>
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="body-preview-card">
+                    <div class="card-title">我的身体数据</div>
+                    <div class="body-preview-content">
+                        <div class="body-model">
+                            <svg class="body-silhouette" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                                <ellipse class="body-head" cx="50" cy="25" rx="20" ry="25"/>
+                                <path class="body-torso" d="M30,50 Q30,100 40,120 L60,120 Q70,100 70,50 Z"/>
+                                <path class="body-leg" d="M40,120 L35,190 L45,190 L50,120 L55,190 L65,190 L60,120 Z"/>
+                            </svg>
+                        </div>
+                        <div class="body-stats">
+                            <div class="body-slider">
+                                <div class="slider-label">预估体脂率</div>
+                                <div class="slider-container">
+                                    <input type="range" min="10" max="40" value="26" class="body-range">
+                                    <div class="slider-labels">
+                                        <span>偏低</span>
+                                        <span>正常</span>
+                                        <span>偏高</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body-slider">
+                                <div class="slider-label">肌肉含量</div>
+                                <div class="slider-container">
+                                    <input type="range" min="20" max="50" value="35" class="body-range">
+                                    <div class="slider-labels">
+                                        <span>较少</span>
+                                        <span>适中</span>
+                                        <span>丰富</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body-metrics">
+                        <div class="metric">
+                            <div class="metric-value">72.5</div>
+                            <div class="metric-label">当前体重(kg)</div>
+                        </div>
+                        <div class="metric highlight">
+                            <div class="metric-value">-2.3</div>
+                            <div class="metric-label">本月变化(kg)</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">85</div>
+                            <div class="metric-label">腰围(cm)</div>
+                        </div>
+                    </div>
+                    <div class="body-actions">
+                        <button class="button outline">更新数据</button>
+                        <button class="button primary">查看详情</button>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <span class="material-icons">schedule</span> 我的计划
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div>
+                            <div class="plan-title">
+                                <span class="material-icons plan-icon">offline_bolt</span>
+                                21天轻断食计划
+                            </div>
+                            <div style="color: var(--text-secondary); font-size: 14px;">专注减脂，重塑体态</div>
+                        </div>
+                        <span class="material-icons" style="color: var(--text-tertiary);">chevron_right</span>
+                    </div>
+                    <div class="plan-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 35%;"></div>
+                        </div>
+                        <div class="progress-text">已完成 7/21 天</div>
+                    </div>
+                    <div class="plan-today">
+                        <div class="today-label">今日计划</div>
+                        <div class="today-content">16:8间歇性断食 + 低糖果蔬汁 750ml</div>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <h3>30天腰围挑战</h3>
+                        <div class="challenge-badge">
+                            <span class="material-icons">local_fire_department</span> 热门
+                        </div>
+                    </div>
+                    <div class="challenge-info">
+                        <div class="challenge-stat">
+                            <div class="stat-value">128</div>
+                            <div class="stat-label">参与人数</div>
+                        </div>
+                        <div class="challenge-stat">
+                            <div class="stat-value">¥3600</div>
+                            <div class="stat-label">奖金池</div>
+                        </div>
+                        <div class="challenge-stat">
+                            <div class="stat-value">12天</div>
+                            <div class="stat-label">剩余时间</div>
+                        </div>
+                    </div>
+                    <div class="challenge-desc">
+                        完成30天辟谷轻断食计划，腰围减少5cm，返还全部押金并瓜分奖金池！
+                    </div>
+                    <button class="button primary full">立即参与挑战</button>
+                </div>
+
+                <div class="section-title">
+                    <span class="material-icons">restaurant</span> 推荐食谱
+                </div>
+
+                <div class="recipes-container">
+                    <div class="recipe-card">
+                        <div class="recipe-image" style="background-image: url('https://images.unsplash.com/photo-1622597467836-f3285f2131b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');">
+                            <div class="recipe-type">辟谷期</div>
+                        </div>
+                        <div class="recipe-content">
+                            <h4>青瓜薏米水</h4>
+                            <div class="recipe-stats">
+                                <div class="recipe-stat">
+                                    <span class="material-icons">local_fire_department</span> 低卡
+                                </div>
+                                <div class="recipe-stat">
+                                    <span class="material-icons">schedule</span> 10分钟
+                                </div>
+                            </div>
+                            <div class="recipe-ingredients">主料: 青瓜, 薏米, 蜂蜜</div>
+                        </div>
+                    </div>
+                    <div class="recipe-card">
+                        <div class="recipe-image" style="background-image: url('https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');">
+                            <div class="recipe-type">复食期</div>
+                        </div>
+                        <div class="recipe-content">
+                            <h4>南瓜藜麦粥</h4>
+                            <div class="recipe-stats">
+                                <div class="recipe-stat">
+                                    <span class="material-icons">fitness_center</span> 高蛋白
+                                </div>
+                                <div class="recipe-stat">
+                                    <span class="material-icons">schedule</span> 20分钟
+                                </div>
+                            </div>
+                            <div class="recipe-ingredients">主料: 南瓜, 藜麦, 燕麦</div>
+                        </div>
+                    </div>
+                    <div class="recipe-card">
+                        <div class="recipe-image" style="background-image: url('https://images.unsplash.com/photo-1638176067000-9e2f9ad161c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');">
+                            <div class="recipe-type">断食期</div>
+                        </div>
+                        <div class="recipe-content">
+                            <h4>柠檬姜汁苹果醋</h4>
+                            <div class="recipe-stats">
+                                <div class="recipe-stat">
+                                    <span class="material-icons">spa</span> 排毒
+                                </div>
+                                <div class="recipe-stat">
+                                    <span class="material-icons">schedule</span> 5分钟
+                                </div>
+                            </div>
+                            <div class="recipe-ingredients">主料: 柠檬汁, 姜, 苹果醋</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <span class="material-icons">school</span> 减重知识
+                </div>
+
+                <div class="knowledge-card">
+                    <div class="knowledge-image" style="background-image: url('https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                    <div class="knowledge-content">
+                        <span class="knowledge-category">减重科学</span>
+                        <h4>为什么间歇性断食有效？科学解析</h4>
+                        <p style="color: var(--text-secondary); font-size: 14px; margin: var(--space-sm) 0;">
+                            探索间歇性断食如何激活自噬机制，促进脂肪代谢和细胞修复...
+                        </p>
+                        <div class="knowledge-meta">
+                            <div class="knowledge-author">
+                                <img src="https://randomuser.me/api/portraits/men/42.jpg" class="avatar small">
+                                <span>Dr. 李明</span>
+                            </div>
+                            <div class="knowledge-stats">
+                                <span class="material-icons">visibility</span> 1.2k
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-bar">
+                <a href="#home" class="nav-item active">
+                    <span class="material-icons nav-icon">home</span>
+                    <span>首页</span>
+                </a>
+                <a href="#tools" class="nav-item">
+                    <span class="material-icons nav-icon">psychology</span>
+                    <span>工具</span>
+                </a>
+                <a href="#products" class="nav-item">
+                    <span class="material-icons nav-icon">shopping_bag</span>
+                    <span>商城</span>
+                </a>
+                <a href="#community" class="nav-item">
+                    <span class="material-icons nav-icon">forum</span>
+                    <span>社区</span>
+                </a>
+                <a href="#knowledge" class="nav-item">
+                    <span class="material-icons nav-icon">auto_stories</span>
+                    <span>知识库</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 养生工具页 -->
+        <div class="screen" id="tools">
+            <div class="header">
+                <div class="header-title">养生工具</div>
+                <div class="header-action">
+                    <button class="icon-button">
+                        <span class="material-icons">notifications</span>
+                    </button>
+                    <button class="icon-button">
+                        <span class="material-icons">person</span>
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="tools-grid">
+                    <a href="#symptom-navigator" class="tool-card">
+                        <div class="tool-icon" style="background-color: var(--neon-pink);">
+                            <span class="material-icons">health_and_safety</span>
+                        </div>
+                        <div class="tool-name">症状导航器</div>
+                        <div class="tool-desc">出现不适？获取专业指导</div>
+                    </a>
+                    <a href="#" class="tool-card">
+                        <div class="tool-icon" style="background-color: var(--primary);">
+                            <span class="material-icons">timer</span>
+                        </div>
+                        <div class="tool-name">断食计时器</div>
+                        <div class="tool-desc">追踪您的断食进度</div>
+                    </a>
+                    <a href="#" class="tool-card">
+                        <div class="tool-icon" style="background-color: var(--goal-body);">
+                            <span class="material-icons">monitor_heart</span>
+                        </div>
+                        <div class="tool-name">体质测试</div>
+                        <div class="tool-desc">了解您的中医体质类型</div>
+                    </a>
+                    <a href="#" class="tool-card">
+                        <div class="tool-icon" style="background-color: var(--goal-culture);">
+                            <span class="material-icons">today</span>
+                        </div>
+                        <div class="tool-name">节气日历</div>
+                        <div class="tool-desc">传统节气养生方案</div>
+                    </a>
+                    <a href="#" class="tool-card">
+                        <div class="tool-icon" style="background-color: var(--goal-explore);">
+                            <span class="material-icons">food_bank</span>
+                        </div>
+                        <div class="tool-name">膳食计算器</div>
+                        <div class="tool-desc">评估营养均衡度</div>
+                    </a>
+                    <a href="#" class="tool-card">
+                        <div class="tool-icon" style="background-color: var(--neon-blue);">
+                            <span class="material-icons">note_alt</span>
+                        </div>
+                        <div class="tool-name">养生日记</div>
+                        <div class="tool-desc">记录辟谷变化</div>
+                    </a>
+                </div>
+
+                <div class="sleep-tool-card">
+                    <div class="sleep-icon">
+                        <span class="material-icons">bedtime</span>
+                    </div>
+                    <div class="sleep-content">
+                        <h3>健康睡眠助手</h3>
+                        <p>开启睡眠质量监测，获得个性化改善建议</p>
+                    </div>
+                    <div class="sleep-action">
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <span class="material-icons">trending_up</span> 热门工具
+                </div>
+
+                <div class="popular-tool-card">
+                    <div class="popular-tool-header">
+                        <div class="popular-tool-icon">
+                            <span class="material-icons">self_improvement</span>
+                        </div>
+                        <h3>冥想引导</h3>
+                    </div>
+                    <div class="popular-tool-desc">
+                        专业冥想引导音频，帮助您在辟谷期间保持心灵平静，增强意志力
+                    </div>
+                    <div class="popular-tool-stats">
+                        <div class="tool-stat">
+                            <span class="material-icons">headphones</span> 25个音频
+                        </div>
+                        <div class="tool-stat">
+                            <span class="material-icons">favorite</span> 2.3k用户喜爱
+                        </div>
+                    </div>
+                    <button class="button primary full">开始冥想</button>
+                </div>
+
+                <div class="popular-tool-card">
+                    <div class="popular-tool-header">
+                        <div class="popular-tool-icon">
+                            <span class="material-icons">insert_chart</span>
+                        </div>
+                        <h3>辟谷数据分析</h3>
+                    </div>
+                    <div class="popular-tool-desc">
+                        上传您的辟谷数据，获得AI分析报告，了解身体变化趋势
+                    </div>
+                    <div class="popular-tool-stats">
+                        <div class="tool-stat">
+                            <span class="material-icons">analytics</span> 全面分析
+                        </div>
+                        <div class="tool-stat">
+                            <span class="material-icons">visibility</span> 上周使用1.8k次
+                        </div>
+                    </div>
+                    <button class="button primary full">开始分析</button>
+                </div>
+            </div>
+            <div class="nav-bar">
+                <a href="#home" class="nav-item">
+                    <span class="material-icons nav-icon">home</span>
+                    <span>首页</span>
+                </a>
+                <a href="#tools" class="nav-item active">
+                    <span class="material-icons nav-icon">psychology</span>
+                    <span>工具</span>
+                </a>
+                <a href="#products" class="nav-item">
+                    <span class="material-icons nav-icon">shopping_bag</span>
+                    <span>商城</span>
+                </a>
+                <a href="#community" class="nav-item">
+                    <span class="material-icons nav-icon">forum</span>
+                    <span>社区</span>
+                </a>
+                <a href="#knowledge" class="nav-item">
+                    <span class="material-icons nav-icon">auto_stories</span>
+                    <span>知识库</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 辟谷产品页 -->
+        <div class="screen" id="products">
+            <div class="header">
+                <div class="header-title">辟谷产品</div>
+                <div class="header-action">
+                    <button class="icon-button">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <button class="icon-button">
+                        <span class="material-icons">shopping_cart</span>
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="product-categories">
+                    <div class="category-item active">全部</div>
+                    <div class="category-item">辟谷丸</div>
+                    <div class="category-item">养生茶</div>
+                    <div class="category-item">代餐粉</div>
+                    <div class="category-item">养生器具</div>
+                    <div class="category-item">文化用品</div>
+                </div>
+                <div class="product-filters">
+                    <div class="filter-button">
+                        <span class="material-icons">swap_vert</span>
+                        价格
+                    </div>
+                    <div class="filter-button">
+                        <span class="material-icons">star</span>
+                        评分
+                    </div>
+                    <div class="filter-button">
+                        <span class="material-icons">filter_list</span>
+                        筛选
+                    </div>
+                </div>
+
+                <div class="special-offer">
+                    <div class="offer-image" style="background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                    <div class="offer-content">
+                        <span class="offer-badge">限时特惠</span>
+                        <h3>秋分养生礼盒</h3>
+                        <div class="offer-desc">
+                            传统配方辟谷丸 + 养生茶 + 节气养生手册，秋季调理必备
+                        </div>
+                        <div class="offer-price">
+                            <div class="price-now">¥199</div>
+                            <div class="price-original">¥299</div>
+                        </div>
+                        <div class="offer-countdown">
+                            <div class="countdown-label">限时优惠剩余</div>
+                            <div class="countdown-timer">23:45:30</div>
+                        </div>
+                        <button class="button primary full">立即购买</button>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <span class="material-icons">thumb_up</span> 热销产品
+                </div>
+
+                <a href="#product-detail" class="product-card">
+                    <div class="product-badge">畅销</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80');"></div>
+                    <div class="product-content">
+                        <div class="product-tags">
+                            <span class="product-tag">传统配方</span>
+                            <span class="product-tag">五谷辟谷</span>
+                        </div>
+                        <h3>五谷养生辟谷丸</h3>
+                        <div class="product-desc">
+                            采用传统配方，甄选五谷精华，辅助辟谷期间营养补充
+                        </div>
+                        <div class="product-meta">
+                            <div class="product-price">¥128</div>
+                            <div class="product-rating">
+                                <span class="material-icons">star</span> 4.8
+                            </div>
+                        </div>
+                        <div class="product-certifications">
+                            <div class="certification">
+                                <span class="material-icons">verified</span> 质检认证
+                            </div>
+                            <div class="certification">
+                                <span class="material-icons">verified_user</span> 安全可靠
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1614735241165-6756e1df61ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1036&q=80');"></div>
+                    <div class="product-content">
+                        <div class="product-tags">
+                            <span class="product-tag">代餐粉</span>
+                            <span class="product-tag">高蛋白</span>
+                        </div>
+                        <h3>植物蛋白代餐粉</h3>
+                        <div class="product-desc">
+                            纯植物蛋白，低热量高饱腹感，辟谷期间理想代餐选择
+                        </div>
+                        <div class="product-meta">
+                            <div class="product-price">¥158</div>
+                            <div class="product-rating">
+                                <span class="material-icons">star</span> 4.6
+                            </div>
+                        </div>
+                        <div class="product-certifications">
+                            <div class="certification">
+                                <span class="material-icons">verified</span> 质检认证
+                            </div>
+                            <div class="certification">
+                                <span class="material-icons">verified_user</span> 安全可靠
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="section-title">
+                    <span class="material-icons">auto_awesome</span> 新品推荐
+                </div>
+
+                <div class="horizontal-products">
+                    <a href="#" class="horizontal-product">
+                        <div class="h-product-image" style="background-image: url('https://images.unsplash.com/photo-1592154017162-ae7638c90c21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                        <div class="h-product-info">
+                            <div>养生蒸汽眼罩</div>
+                            <div class="h-product-price">¥68</div>
+                        </div>
+                    </a>
+                    <a href="#" class="horizontal-product">
+                        <div class="h-product-image" style="background-image: url('https://images.unsplash.com/photo-1458532239918-14b57804b310?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                        <div class="h-product-info">
+                            <div>古法参茶</div>
+                            <div class="h-product-price">¥88</div>
+                        </div>
+                    </a>
+                    <a href="#" class="horizontal-product">
+                        <div class="h-product-image" style="background-image: url('https://images.unsplash.com/photo-1489533119213-66a5cd877091?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80');"></div>
+                        <div class="h-product-info">
+                            <div>传统药香炉</div>
+                            <div class="h-product-price">¥198</div>
+                        </div>
+                    </a>
+                    <a href="#" class="horizontal-product">
+                        <div class="h-product-image" style="background-image: url('https://images.unsplash.com/photo-1615485290382-441e4d049cb5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                        <div class="h-product-info">
+                            <div>辟谷书籍套装</div>
+                            <div class="h-product-price">¥129</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-bar">
+                <a href="#home" class="nav-item">
+                    <span class="material-icons nav-icon">home</span>
+                    <span>首页</span>
+                </a>
+                <a href="#tools" class="nav-item">
+                    <span class="material-icons nav-icon">psychology</span>
+                    <span>工具</span>
+                </a>
+                <a href="#products" class="nav-item active">
+                    <span class="material-icons nav-icon">shopping_bag</span>
+                    <span>商城</span>
+                </a>
+                <a href="#community" class="nav-item">
+                    <span class="material-icons nav-icon">forum</span>
+                    <span>社区</span>
+                </a>
+                <a href="#knowledge" class="nav-item">
+                    <span class="material-icons nav-icon">auto_stories</span>
+                    <span>知识库</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 社区页面 -->
+        <div class="screen" id="community">
+            <div class="header">
+                <div class="header-title">养生社区</div>
+                <div class="header-action">
+                    <button class="icon-button">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <button class="icon-button">
+                        <span class="material-icons">notifications</span>
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="community-categories">
+                    <div class="category-item active">推荐</div>
+                    <div class="category-item">热门</div>
+                    <div class="category-item">关注</div>
+                    <div class="category-item">减重</div>
+                    <div class="category-item">体验</div>
+                    <div class="category-item">文化</div>
+                </div>
+
+                <div class="section-title">
+                    <span class="material-icons">whatshot</span> 热门话题
+                </div>
+
+                <div class="hot-topics">
+                    <div class="topic-card">
+                        <div class="topic-banner" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');">
+                            <span class="topic-label">热议</span>
+                            <h3>辟谷后如何健康复食？</h3>
+                        </div>
+                        <div class="topic-stats">
+                            <div class="topic-stat">
+                                <span class="material-icons">forum</span> 56条讨论
+                            </div>
+                            <div class="topic-stat">
+                                <span class="material-icons">person</span> 238人参与
+                            </div>
+                        </div>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-banner" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1178&q=80');">
+                            <span class="topic-label">经验</span>
+                            <h3>秋分辟谷体验分享</h3>
+                        </div>
+                        <div class="topic-stats">
+                            <div class="topic-stat">
+                                <span class="material-icons">forum</span> 32条讨论
+                            </div>
+                            <div class="topic-stat">
+                                <span class="material-icons">person</span> 126人参与
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <span class="material-icons">forum</span> 最新动态
+                </div>
+
+                <div class="community-posts">
+                    <a href="#" class="post-card">
+                        <div class="post-header">
+                            <img src="https://randomuser.me/api/portraits/women/12.jpg" class="post-avatar">
+                            <div class="post-info">
+                                <div class="post-author">林雨晴</div>
+                                <div class="post-meta">
+                                    <span>2小时前</span>
+                                    <div class="verified-badge">
+                                        <span class="material-icons">verified</span> 养生达人
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-more">
+                                <span class="material-icons">more_horiz</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p>完成了21天的调理辟谷计划，分享一些心得：前3天最难熬，但坚持下来后，精神状态明显改善，皮肤也变好了！减重5.2kg，最重要的是改掉了一些不良饮食习惯。</p>
+                        </div>
+                        <div class="post-images">
+                            <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                            <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                        </div>
+                        <div class="post-tags">
+                            <span class="post-tag">#减重分享</span>
+                            <span class="post-tag">#辟谷21天</span>
+                            <span class="post-tag">#养生日记</span>
+                        </div>
+                        <div class="post-actions">
+                            <div class="post-action">
+                                <span class="material-icons">favorite_border</span> 89
+                            </div>
+                            <div class="post-action">
+                                <span class="material-icons">comment</span> 32
+                            </div>
+                            <div class="post-action">
+                                <span class="material-icons">share</span> 12
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="post-card">
+                        <div class="post-header">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" class="post-avatar">
+                            <div class="post-info">
+                                <div class="post-author">张文博</div>
+                                <div class="post-meta">
+                                    <span>昨天</span>
+                                    <div class="verified-badge">
+                                        <span class="material-icons">verified</span> 中医爱好者
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-more">
+                                <span class="material-icons">more_horiz</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p>今天尝试了《云笈七签》中记载的一种古法辟谷丸配方（现代改良版），用黑芝麻、枸杞、蜂蜜等制作，确实有很好的饱腹效果，分享给大家。</p>
+                        </div>
+                        <div class="post-images">
+                            <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1583592643761-bf2ecd0e7de3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80');"></div>
+                        </div>
+                        <div class="post-tags">
+                            <span class="post-tag">#古方分享</span>
+                            <span class="post-tag">#辟谷丸</span>
+                            <span class="post-tag">#传统文化</span>
+                        </div>
+                        <div class="post-actions">
+                            <div class="post-action">
+                                <span class="material-icons">favorite_border</span> 56
+                            </div>
+                            <div class="post-action">
+                                <span class="material-icons">comment</span> 18
+                            </div>
+                            <div class="post-action">
+                                <span class="material-icons">share</span> 7
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="section-title">
+                    <span class="material-icons">groups</span> 推荐小组
+                </div>
+
+                <div class="groups-container">
+                    <a href="#" class="group-card">
+                        <div class="group-image" style="background-image: url('https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1184&q=80');"></div>
+                        <div class="group-content">
+                            <h4>21天减重挑战</h4>
+                            <div class="group-desc">一起参与21天辟谷减重计划，互相监督，共同成长</div>
+                            <div class="group-stats">
+                                <div class="group-members">
+                                    <div class="member-avatars">
+                                        <img src="https://randomuser.me/api/portraits/women/22.jpg" class="member-avatar">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="member-avatar">
+                                        <img src="https://randomuser.me/api/portraits/women/45.jpg" class="member-avatar">
+                                    </div>
+                                    <div class="member-count">328成员</div>
+                                </div>
+                                <div class="group-activity">
+                                    <span class="material-icons">local_fire_department</span> 活跃
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="group-card">
+                        <div class="group-image" style="background-image: url('https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                        <div class="group-content">
+                            <h4>传统辟谷文化研习</h4>
+                            <div class="group-desc">探讨古籍中的辟谷智慧，传承中华养生文化</div>
+                            <div class="group-stats">
+                                <div class="group-members">
+                                    <div class="member-avatars">
+                                        <img src="https://randomuser.me/api/portraits/men/42.jpg" class="member-avatar">
+                                        <img src="https://randomuser.me/api/portraits/women/32.jpg" class="member-avatar">
+                                        <img src="https://randomuser.me/api/portraits/men/22.jpg" class="member-avatar">
+                                    </div>
+                                    <div class="member-count">156成员</div>
+                                </div>
+                                <div class="group-activity">
+                                    <span class="material-icons">local_fire_department</span> 活跃
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <button class="create-post-fab">
+                    <span class="material-icons">add</span>
+                </button>
+            </div>
+            <div class="nav-bar">
+                <a href="#home" class="nav-item">
+                    <span class="material-icons nav-icon">home</span>
+                    <span>首页</span>
+                </a>
+                <a href="#tools" class="nav-item">
+                    <span class="material-icons nav-icon">psychology</span>
+                    <span>工具</span>
+                </a>
+                <a href="#products" class="nav-item">
+                    <span class="material-icons nav-icon">shopping_bag</span>
+                    <span>商城</span>
+                </a>
+                <a href="#community" class="nav-item active">
+                    <span class="material-icons nav-icon">forum</span>
+                    <span>社区</span>
+                </a>
+                <a href="#knowledge" class="nav-item">
+                    <span class="material-icons nav-icon">auto_stories</span>
+                    <span>知识库</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 知识库页面 -->
+        <div class="screen" id="knowledge">
+            <div class="header">
+                <div class="header-title">养生知识库</div>
+                <div class="header-action">
+                    <button class="icon-button">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <button class="icon-button">
+                        <span class="material-icons">bookmark</span>
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="knowledge-categories">
+                    <div class="category-item active">推荐</div>
+                    <div class="category-item">古籍</div>
+                    <div class="category-item">现代研究</div>
+                    <div class="category-item">方案</div>
+                    <div class="category-item">食谱</div>
+                    <div class="category-item">视频</div>
+                </div>
+
+                <div class="section-title">
+                    <span class="material-icons">stars</span> 精选内容
+                </div>
+
+                <div class="featured-knowledge">
+                    <a href="#classic-detail" class="featured-article">
+                        <div class="featured-image" style="background-image: url('https://images.unsplash.com/photo-1533327325824-76bc4e62d560?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80');">
+                            <div class="featured-label">经典解读</div>
+                        </div>
+                        <div class="featured-content">
+                            <h3>《黄帝内经》中的辟谷养生智慧</h3>
+                            <p>《黄帝内经》作为中医经典，对辟谷有何论述？如何理解"谷气通于肺"的养生之道？</p>
+                            <div class="article-meta">
+                                <div class="article-author">
+                                    <img src="https://randomuser.me/api/portraits/men/42.jpg" class="avatar small">
+                                    <span>李教授</span>
+                                </div>
+                                <div class="article-stats">
+                                    <span class="material-icons">visibility</span> 3.2k
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="knowledge-sections">
+                    <div class="knowledge-section">
+                        <div class="section-header">
+                            <div class="section-title" style="margin-top: 0;">
+                                <span class="material-icons">auto_stories</span> 古籍精选
+                            </div>
+                            <a href="#" class="more-link">更多</a>
+                        </div>
+                        <div class="classics-container">
+                            <a href="#" class="classic-card">
+                                <div class="classic-image">
+                                    <svg class="classic-book" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="10" y="10" width="80" height="120" rx="2" fill="#4A638C"/>
+                                        <rect x="15" y="15" width="70" height="110" rx="1" fill="#1E1E1E"/>
+                                        <text x="50" y="70" font-size="12" fill="#F3E9D2" text-anchor="middle">道德经</text>
+                                    </svg>
+                                </div>
+                                <div class="classic-info">
+                                    <h4>道德经</h4>
+                                    <div class="classic-author">老子</div>
+                                </div>
+                            </a>
+                            <a href="#" class="classic-card">
+                                <div class="classic-image">
+                                    <svg class="classic-book" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="10" y="10" width="80" height="120" rx="2" fill="#6D9788"/>
+                                        <rect x="15" y="15" width="70" height="110" rx="1" fill="#1E1E1E"/>
+                                        <text x="50" y="70" font-size="12" fill="#F3E9D2" text-anchor="middle">素问</text>
+                                    </svg>
+                                </div>
+                                <div class="classic-info">
+                                    <h4>黄帝内经·素问</h4>
+                                    <div class="classic-author">佚名</div>
+                                </div>
+                            </a>
+                            <a href="#" class="classic-card">
+                                <div class="classic-image">
+                                    <svg class="classic-book" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="10" y="10" width="80" height="120" rx="2" fill="#8C52FF"/>
+                                        <rect x="15" y="15" width="70" height="110" rx="1" fill="#1E1E1E"/>
+                                        <text x="50" y="70" font-size="12" fill="#F3E9D2" text-anchor="middle">本草纲目</text>
+                                    </svg>
+                                </div>
+                                <div class="classic-info">
+                                    <h4>本草纲目</h4>
+                                    <div class="classic-author">李时珍</div>
+                                </div>
+                            </a>
+                            <a href="#" class="classic-card">
+                                <div class="classic-image">
+                                    <svg class="classic-book" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="10" y="10" width="80" height="120" rx="2" fill="#FF6B6B"/>
+                                        <rect x="15" y="15" width="70" height="110" rx="1" fill="#1E1E1E"/>
+                                        <text x="50" y="70" font-size="12" fill="#F3E9D2" text-anchor="middle">千金方</text>
+                                    </svg>
+                                </div>
+                                <div class="classic-info">
+                                    <h4>千金要方</h4>
+                                    <div class="classic-author">孙思邈</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="knowledge-section">
+                        <div class="section-header">
+                            <div class="section-title" style="margin-top: 0;">
+                                <span class="material-icons">science</span> 现代研究
+                            </div>
+                            <a href="#" class="more-link">更多</a>
+                        </div>
+                        <div class="research-card">
+                            <div class="research-preview">
+                                <div class="research-image" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                                <div class="research-type">论文</div>
+                            </div>
+                            <div class="research-content">
+                                <h4>间歇性断食对细胞代谢的影响</h4>
+                                <div class="research-desc">
+                                    研究表明，16小时断食可激活细胞自噬机制，促进细胞修复与更新...
+                                </div>
+                                <div class="research-meta">
+                                    <div>发表于: 国际营养学杂志</div>
+                                    <div>2023年3月</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="research-card">
+                            <div class="research-preview">
+                                <div class="research-image" style="background-image: url('https://images.unsplash.com/photo-1576671414121-aa2d384eebb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1039&q=80');"></div>
+                                <div class="research-type">综述</div>
+                            </div>
+                            <div class="research-content">
+                                <h4>中医辟谷与现代断食疗法的比较研究</h4>
+                                <div class="research-desc">
+                                    对比分析传统辟谷理论与现代医学断食研究成果，探索二者的异同...
+                                </div>
+                                <div class="research-meta">
+                                    <div>作者: 张博士研究团队</div>
+                                    <div>2023年1月</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="knowledge-section">
+                        <div class="section-header">
+                            <div class="section-title" style="margin-top: 0;">
+                                <span class="material-icons">school</span> 入门指南
+                            </div>
+                            <a href="#" class="more-link">更多</a>
+                        </div>
+                        <div class="guides-container">
+                            <a href="#" class="guide-card">
+                                <div class="guide-icon">
+                                    <span class="material-icons">looks_one</span>
+                                </div>
+                                <div class="guide-info">
+                                    <h4>辟谷新手入门</h4>
+                                    <div class="guide-meta">
+                                        <span class="material-icons">visibility</span> 2.5k 阅读
+                                    </div>
+                                </div>
+                                <div class="guide-arrow">
+                                    <span class="material-icons">chevron_right</span>
+                                </div>
+                            </a>
+                            <a href="#" class="guide-card">
+                                <div class="guide-icon">
+                                    <span class="material-icons">looks_two</span>
+                                </div>
+                                <div class="guide-info">
+                                    <h4>7天辟谷计划详解</h4>
+                                    <div class="guide-meta">
+                                        <span class="material-icons">visibility</span> 1.8k 阅读
+                                    </div>
+                                </div>
+                                <div class="guide-arrow">
+                                    <span class="material-icons">chevron_right</span>
+                                </div>
+                            </a>
+                            <a href="#" class="guide-card">
+                                <div class="guide-icon">
+                                    <span class="material-icons">looks_3</span>
+                                </div>
+                                <div class="guide-info">
+                                    <h4>常见不适反应与应对</h4>
+                                    <div class="guide-meta">
+                                        <span class="material-icons">visibility</span> 3.2k 阅读
+                                    </div>
+                                </div>
+                                <div class="guide-arrow">
+                                    <span class="material-icons">chevron_right</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-bar">
+                <a href="#home" class="nav-item">
+                    <span class="material-icons nav-icon">home</span>
+                    <span>首页</span>
+                </a>
+                <a href="#tools" class="nav-item">
+                    <span class="material-icons nav-icon">psychology</span>
+                    <span>工具</span>
+                </a>
+                <a href="#products" class="nav-item">
+                    <span class="material-icons nav-icon">shopping_bag</span>
+                    <span>商城</span>
+                </a>
+                <a href="#community" class="nav-item">
+                    <span class="material-icons nav-icon">forum</span>
+                    <span>社区</span>
+                </a>
+                <a href="#knowledge" class="nav-item active">
+                    <span class="material-icons nav-icon">auto_stories</span>
+                    <span>知识库</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 计划详情页 -->
+        <div class="screen" id="plan-detail">
+            <div class="header">
+                <button class="icon-button" onclick="window.location.href='#home'">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+                <div class="header-title">计划详情</div>
+                <div class="header-action">
+                    <button class="icon-button">
+                        <span class="material-icons">more_vert</span>
+                    </button>
+                </div>
+            </div>
+            <div class="full-content">
+                <div class="plan-hero">
+                    <h2>21天轻断食计划</h2>
+                    <div style="color: var(--text-secondary); margin-top: var(--space-sm);">专注减脂，重塑体态</div>
+                    <div class="plan-progress-detail">
+                        <div class="progress-bar-large">
+                            <div class="progress-fill" style="width: 35%;"></div>
+                        </div>
+                        <div class="plan-day">第7天 / 共21天</div>
+                    </div>
+                </div>
+
+                <div class="today-schedule-card">
+                    <div class="schedule-header">
+                        <h3>今日计划</h3>
+                        <div class="schedule-date">9月15日 星期五</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">8:00</div>
+                        <div class="schedule-content">
+                            <div class="schedule-icon" style="background-color: var(--goal-body);">
+                                <span class="material-icons">water_drop</span>
+                            </div>
+                            <div class="schedule-detail">
+                                <h4>温水加蜂蜜</h4>
+                                <p>250ml温水，加入5ml蜂蜜，帮助激活肠胃</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">12:00</div>
+                        <div class="schedule-content">
+                            <div class="schedule-icon" style="background-color: var(--goal-shape);">
+                                <span class="material-icons">blender</span>
+                            </div>
+                            <div class="schedule-detail">
+                                <h4>蔬果汁</h4>
+                                <p>350ml蔬果汁，黄瓜+芹菜+苹果+柠檬</p>
+                                <a href="#" class="schedule-link">查看详细配方</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">16:00</div>
+                        <div class="schedule-content">
+                            <div class="schedule-icon" style="background-color: var(--goal-culture);">
+                                <span class="material-icons">self_improvement</span>
+                            </div>
+                            <div class="schedule-detail">
+                                <h4>冥想练习</h4>
+                                <p>15分钟辟谷冥想，增强意志力，缓解饥饿感</p>
+                                <a href="#" class="schedule-link">播放引导音频</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">18:00</div>
+                        <div class="schedule-content">
+                            <div class="schedule-icon" style="background-color: var(--goal-shape);">
+                                <span class="material-icons">restaurant</span>
+                            </div>
+                            <div class="schedule-detail">
+                                <h4>代餐粉</h4>
+                                <p>一勺代餐粉，混合400ml水，约120卡路里</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="daily-tracking-card">
+                    <h3>今日状态记录</h3>
+                    <div class="tracking-metrics">
+                        <div class="tracking-item">
+                            <div class="tracking-label">饥饿感程度</div>
+                            <div class="tracking-scale">
+                                <div class="scale-point">轻微</div>
+                                <div class="scale-point">适中</div>
+                                <div class="scale-point">强烈</div>
+                            </div>
+                            <div class="tracking-input-container">
+                                <input type="range" min="1" max="5" value="2" class="tracking-range">
+                            </div>
+                        </div>
+                        <div class="tracking-item">
+                            <div class="tracking-label">精神状态</div>
+                            <div class="tracking-scale">
+                                <div class="scale-point">疲倦</div>
+                                <div class="scale-point">平稳</div>
+                                <div class="scale-point">活跃</div>
+                            </div>
+                            <div class="tracking-input-container">
+                                <input type="range" min="1" max="5" value="4" class="tracking-range">
+                            </div>
+                        </div>
+                        <div class="tracking-item">
+                            <div class="tracking-label">皮肤状态</div>
+                            <div class="tracking-scale">
+                                <div class="scale-point">暗沉</div>
+                                <div class="scale-point">普通</div>
+                                <div class="scale-point">红润</div>
+                            </div>
+                            <div class="tracking-input-container">
+                                <input type="range" min="1" max="5" value="3" class="tracking-range">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tracking-notes">
+                        <div class="notes-label">今日感受记录</div>
+                        <textarea class="notes-input" placeholder="记录今天的身体变化、感受或任何想法..."></textarea>
+                    </div>
+                    <button class="button primary full">保存今日记录</button>
+                </div>
+
+                <div class="plan-tips-card">
+                    <div class="tips-header">
+                        <span class="material-icons">lightbulb</span>
+                        <h3>今日养生提示</h3>
+                    </div>
+                    <div class="tips-content">
+                        <p>轻断食第7天是突破瓶颈的关键，可能会感到疲劳或轻微头晕，这是正常现象。</p>
+                        <p>建议今天多休息，保持水分摄入，如感到明显不适，可适当增加少量蔬果汁。</p>
+                        <p>睡前按摩涌泉穴3-5分钟，有助于舒缓紧张感，提高睡眠质量。</p>
+                    </div>
+                </div>
+
+                <div class="plan-community-card">
+                    <h3>计划社群</h3>
+                    <div class="community-preview">
+                        <div class="community-members">
+                            <div class="member-avatars">
+                                <img src="https://randomuser.me/api/portraits/women/22.jpg" class="member-avatar">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="member-avatar">
+                                <img src="https://randomuser.me/api/portraits/women/45.jpg" class="member-avatar">
+                                <div class="members-more">+15</div>
+                            </div>
+                            <div class="members-info">
+                                <div class="members-count">21天轻断食挑战小组</div>
+                                <div class="active-now">
+                                    <span class="pulse" style="margin-right: var(--space-xs);"></span>
+                                    5人正在线上
+                                </div>
+                            </div>
+                        </div>
+                        <button class="button primary full">加入社群聊天</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 症状导航器页面 -->
+        <div class="screen" id="symptom-navigator">
+            <div class="header">
+                <button class="icon-button" onclick="window.location.href='#tools'">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+                <div class="header-title">症状导航器</div>
+                <div class="header-action">
+                    <button class="icon-button">
+                        <span class="material-icons">help_outline</span>
+                    </button>
+                </div>
+            </div>
+            <div class="full-content">
+                <div class="symptom-intro">
+                    <div class="symptom-icon">
+                        <span class="material-icons">healing</span>
+                    </div>
+                    <h3>您有什么不适吗？</h3>
+                    <p>选择您在辟谷期间遇到的症状，获取专业建议</p>
+                </div>
+
+                <div class="symptoms-grid">
+                    <div class="symptom-item" onclick="window.location.href='#symptom-detail'">
+                        <div class="symptom-icon-small">
+                            <span class="material-icons">sentiment_very_dissatisfied</span>
+                        </div>
+                        <div class="symptom-name">头晕</div>
+                    </div>
+                    <div class="symptom-item">
+                        <div class="symptom-icon-small">
+                            <span class="material-icons">sick</span>
+                        </div>
+                        <div class="symptom-name">恶心</div>
+                    </div>
+                    <div class="symptom-item">
+                        <div class="symptom-icon-small">
+                            <span class="material-icons">bolt</span>
+                        </div>
+                        <div class="symptom-name">乏力</div>
+                    </div>
+                    <div class="symptom-item">
+                        <div class="symptom-icon-small">
+                            <span class="material-icons">opacity</span>
+                        </div>
+                        <div class="symptom-name">口渴</div>
+                    </div>
+                    <div class="symptom-item">
+                        <div class="symptom-icon-small">
+                            <span class="material-icons">favorite</span>
+                        </div>
+                        <div class="symptom-name">心悸</div>
+                    </div>
+                    <div class="symptom-item">
+                        <div class="symptom-icon-small">
+                            <span class="material-icons">visibility</span>
+                        </div>
+                        <div class="symptom-name">视力模糊</div>
+                    </div>
+                    <div class="symptom-item">
+                        <div class="symptom-icon-small">
+                            <span class="material-icons">airline_seat_legroom_reduced</span>
+                        </div>
+                        <div class="symptom-name">腿部无力</div>
+                    </div>
+                    <div class="symptom-item">
+                        <div class="symptom-icon-small">
+                            <span class="material-icons">more_horiz</span>
+                        </div>
+                        <div class="symptom-name">其他</div>
+                    </div>
+                </div>
+
+                <div id="symptom-detail">
+                    <div class="selected-symptom-card">
+                        <div class="selected-symptom-header">
+                            <div class="selected-symptom-icon">
+                                <span class="material-icons">sentiment_very_dissatisfied</span>
+                            </div>
+                            <h3>头晕症状解决方案</h3>
+                        </div>
+                        <div class="solution-steps">
+                            <div class="solution-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>立即停止活动并休息</h4>
+                                    <p>找个安静的地方坐下或平躺，避免突然起身或剧烈运动</p>
+                                </div>
+                            </div>
+                            <div class="solution-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>补充水分和电解质</h4>
+                                    <p>慢慢饮用250-500ml温水，可添加少量盐或蜂蜜</p>
+                                </div>
+                            </div>
+                            <div class="solution-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>按压穴位</h4>
+                                    <p>按摩太阳穴和百会穴各2-3分钟，有助于缓解头晕</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="solution-decision">
+                            <div class="decision-question">症状是否缓解？</div>
+                            <div class="decision-options">
+                                <button class="button outline">还没有</button>
+                                <button class="button primary">已缓解</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="serious-warning">
+                        <div class="warning-icon">
+                            <span class="material-icons">warning</span>
+                        </div>
+                        <div class="warning-content">
+                            <h4>重要提示</h4>
+                            <p>如果您有以下症状，请立即停止辟谷并寻求医疗帮助：</p>
+                            <ul>
+                                <li>剧烈头痛或持续性头晕</li>
+                                <li>视力突然模糊或复视</li>
+                                <li>心跳异常加速或不规则</li>
+                                <li>严重乏力或意识模糊</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="solution-actions">
+                        <button class="button primary full">
+                            <span class="material-icons" style="margin-right: var(--space-sm);">message</span>
+                            咨询养生顾问
+                        </button>
+                        <button class="button outline full">回到症状清单</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 古籍详情页 -->
+        <div class="screen" id="classic-detail">
+            <div class="header">
+                <button class="icon-button" onclick="window.location.href='#knowledge'">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+                <div class="header-title">古籍详情</div>
+                <div class="header-action">
+                    <button class="icon-button">
+                        <span class="material-icons">bookmark_border</span>
+                    </button>
+                    <button class="icon-button">
+                        <span class="material-icons">share</span>
+                    </button>
+                </div>
+            </div>
+            <div class="full-content">
+                <div class="classic-header">
+                    <div class="classic-illustration">
+                        <svg class="classic-scroll" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="40" y="20" width="120" height="160" rx="5" fill="#F3E9D2"/>
+                            <rect x="50" y="30" width="100" height="140" rx="2" fill="#F3E9D2"/>
+                            <line x1="60" y1="50" x2="140" y2="50" stroke="#4A638C" stroke-width="1"/>
+                            <line x1="60" y1="70" x2="140" y2="70" stroke="#4A638C" stroke-width="1"/>
+                            <line x1="60" y1="90" x2="140" y2="90" stroke="#4A638C" stroke-width="1"/>
+                            <line x1="60" y1="110" x2="140" y2="110" stroke="#4A638C" stroke-width="1"/>
+                            <line x1="60" y1="130" x2="140" y2="130" stroke="#4A638C" stroke-width="1"/>
+                            <line x1="60" y1="150" x2="100" y2="150" stroke="#4A638C" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <h2>《黄帝内经》中的辟谷养生智慧</h2>
+                    <div class="classic-info">
+                        <div class="classic-author">原著：佚名 (战国至秦汉时期)</div>
+                        <div class="classic-type">医学经典 | 养生</div>
+                    </div>
+                </div>
+
+                <div class="classic-content-card">
+                    <div class="content-tabs">
+                        <div class="content-tab active">原文解读</div>
+                        <div class="content-tab">历史背景</div>
+                        <div class="content-tab">现代应用</div>
+                        <div class="content-tab">讨论</div>
+                    </div>
+                    <div class="original-content">
+                        <div class="original-paragraph">
+                            <div class="paragraph-text">
+                                <div class="ancient-text">
+                                    "谷入于胃，洒于六腑，精者注于五脏，气味循脉以注心肺，贵于精微，浊者循胃肠而下于渣。"
+                                </div>
+                                <div class="translation-panel">
+                                    <div class="translation-header">
+                                        <div>白话译文</div>
+                                        <button class="close-translation">
+                                            <span class="material-icons">close</span>
+                                        </button>
+                                    </div>
+                                    <p>食物进入胃后，扩散到六腑，其中精华部分输送到五脏，气味沿着经脉输送到心肺，贵重的是其中精微物质，而污浊的部分则沿着胃肠排出体外。</p>
+                                </div>
+                                <div class="expert-note">
+                                    <img src="https://randomuser.me/api/portraits/men/42.jpg" class="expert-avatar">
+                                    <div class="expert-comment">
+                                        <div class="expert-name">李教授 · 中医学博士</div>
+                                        <p>这段经文揭示了传统中医对消化吸收过程的理解，也是辟谷理论的基础——通过暂时不摄入食物，让体内浊气排出，五脏得以修养，是养生的重要方法。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="paragraph-interaction">
+                                <button class="interaction-button active">
+                                    <span class="material-icons">translate</span>
+                                </button>
+                                <button class="interaction-button">
+                                    <span class="material-icons">comment</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="original-paragraph">
+                            <div class="paragraph-text">
+                                <div class="ancient-text">
+                                    "饮食有节，起居有常，不妄作劳，故能形与神俱，而尽终其天年，度百岁乃去。"
+                                </div>
+                            </div>
+                            <div class="paragraph-interaction">
+                                <button class="interaction-button">
+                                    <span class="material-icons">translate</span>
+                                </button>
+                                <button class="interaction-button">
+                                    <span class="material-icons">comment</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="original-paragraph">
+                            <div class="paragraph-text">
+                                <div class="ancient-text">
+                                    "五谷为养，五果为助，五畜为益，五菜为充，气味合而服之，以补精益气。"
+                                </div>
+                            </div>
+                            <div class="paragraph-interaction">
+                                <button class="interaction-button">
+                                    <span class="material-icons">translate</span>
+                                </button>
+                                <button class="interaction-button">
+                                    <span class="material-icons">comment</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="related-classics-card">
+                    <h3>相关古籍推荐</h3>
+                    <div class="related-classics">
+                        <a href="#" class="related-classic">
+                            <div class="related-classic-icon">
+                                <span class="material-icons">auto_stories</span>
+                            </div>
+                            <div class="related-classic-info">
+                                <h4>《道德经》中的养生思想</h4>
+                                <div class="related-classic-desc">老子的虚静无为与养生之道</div>
+                            </div>
+                        </a>
+                        <a href="#" class="related-classic">
+                            <div class="related-classic-icon">
+                                <span class="material-icons">auto_stories</span>
+                            </div>
+                            <div class="related-classic-info">
+                                <h4>《千金方》辟谷丸配方解析</h4>
+                                <div class="related-classic-desc">孙思邈的养生智慧与实践</div>
+                            </div>
+                        </a>
+                        <a href="#" class="related-classic">
+                            <div class="related-classic-icon">
+                                <span class="material-icons">auto_stories</span>
+                            </div>
+                            <div class="related-classic-info">
+                                <h4>《养性延命录》断食之法</h4>
+                                <div class="related-classic-desc">道家修行与延年益寿</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品详情页 -->
+        <div class="screen" id="product-detail">
+            <div class="header">
+                <button class="icon-button" onclick="window.location.href='#products'">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+                <div class="header-title">产品详情</div>
+                <div class="header-action">
+                    <button class="icon-button">
+                        <span class="material-icons">share</span>
+                    </button>
+                    <button class="icon-button">
+                        <span class="material-icons">shopping_cart</span>
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="product-gallery">
+                    <div class="product-image-large" style="background-image: url('https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80');"></div>
+                    <div class="product-thumbnails">
+                        <div class="product-thumbnail active" style="background-image: url('https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80');"></div>
+                        <div class="product-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1546868871-0f0752e694ee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80');"></div>
+                        <div class="product-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1546868888-fdf3edbe3252?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80');"></div>
+                        <div class="product-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1546868871-006100fb6de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80');"></div>
+                    </div>
+                </div>
+
+                <div class="product-info-card">
+                    <div class="product-tags">
+                        <span class="product-tag">传统配方</span>
+                        <span class="product-tag">五谷辟谷</span>
+                        <span class="product-tag">百人实测</span>
+                    </div>
+                    <h2>五谷养生辟谷丸</h2>
+                    <div class="product-price-large">¥128</div>
+                    <div class="product-rating-large">
+                        <div class="rating-stars">
+                            <span class="material-icons">star</span>
+                            <span class="material-icons">star</span>
+                            <span class="material-icons">star</span>
+                            <span class="material-icons">star</span>
+                            <span class="material-icons">star_half</span>
+                        </div>
+                        <div class="rating-value">4.8</div>
+                        <div class="rating-count">(328条评价)</div>
+                    </div>
+                    <p style="color: var(--text-secondary);">采用传统配方，甄选五谷精华，辅助辟谷期间营养补充，增强体力，缓解饥饿感</p>
+                </div>
+
+                <div class="product-details-card">
+                    <div class="details-tabs">
+                        <div class="details-tab active">产品详情</div>
+                        <div class="details-tab">成分配比</div>
+                        <div class="details-tab">使用方法</div>
+                        <div class="details-tab">用户体验</div>
+                        <div class="details-tab">常见问题</div>
+                    </div>
+                    <div class="product-description">
+                        <p>五谷养生辟谷丸采用传统配方结合现代工艺精制而成，主要由黑芝麻、枸杞子、山药、茯苓、莲子等多种天然食材组成，不添加防腐剂和人工色素。</p>
+                        <p>在辟谷期间，每日服用可补充必要的微量元素和维生素，帮助缓解饥饿感，维持能量水平，使辟谷过程更加舒适。</p>
+
+                        <div class="product-features">
+                            <div class="product-feature">
+                                <div class="feature-icon">
+                                    <span class="material-icons">local_dining</span>
+                                </div>
+                                <div class="feature-info">
+                                    <h4>缓解饥饿感</h4>
+                                    <p>特殊配方设计，可有效缓解辟谷期间的饥饿感，让断食过程更加舒适</p>
+                                </div>
+                            </div>
+                            <div class="product-feature">
+                                <div class="feature-icon">
+                                    <span class="material-icons">battery_charging_full</span>
+                                </div>
+                                <div class="feature-info">
+                                    <h4>补充能量</h4>
+                                    <p>富含多种微量元素和维生素，帮助维持辟谷期间的基本能量需求</p>
+                                </div>
+                            </div>
+                            <div class="product-feature">
+                                <div class="feature-icon">
+                                    <span class="material-icons">eco</span>
+                                </div>
+                                <div class="feature-info">
+                                    <h4>天然植物成分</h4>
+                                    <p>采用100%天然植物原料，不含任何人工添加剂和防腐剂</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-data">
+                            <h4>用户满意度调查</h4>
+                            <div class="data-chart">
+                                <svg class="satisfaction-chart" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="30" y1="130" x2="290" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                                    <line x1="30" y1="20" x2="30" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                                    
+                                    <polyline points="30,100 70,90 110,60 150,40 190,30 230,25 270,20" fill="none" stroke="var(--primary)" stroke-width="2"/>
+                                    
+                                    <circle cx="30" cy="100" r="4" fill="var(--primary)"/>
+                                    <circle cx="70" cy="90" r="4" fill="var(--primary)"/>
+                                    <circle cx="110" cy="60" r="4" fill="var(--primary)"/>
+                                    <circle cx="150" cy="40" r="4" fill="var(--primary)"/>
+                                    <circle cx="190" cy="30" r="4" fill="var(--primary)"/>
+                                    <circle cx="230" cy="25" r="4" fill="var(--primary)"/>
+                                    <circle cx="270" cy="20" r="4" fill="var(--primary)"/>
+                                    
+                                    <text x="30" y="145" font-size="12" fill="var(--text-tertiary)" text-anchor="middle">1天</text>
+                                    <text x="110" y="145" font-size="12" fill="var(--text-tertiary)" text-anchor="middle">3天</text>
+                                    <text x="190" y="145" font-size="12" fill="var(--text-tertiary)" text-anchor="middle">5天</text>
+                                    <text x="270" y="145" font-size="12" fill="var(--text-tertiary)" text-anchor="middle">7天</text>
+                                </svg>
+                                <div class="chart-caption">基于328位用户7天辟谷期间的满意度评分</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="traditional-origin-card">
+                    <h3>传统文化溯源</h3>
+                    <div class="origin-content">
+                        <p>辟谷丸源自道家养生文化，最早可追溯到东汉时期的《神农本草经》和唐代《千金要方》，古人称之为"辟谷仙丹"。</p>
+                        <div class="origin-comparison">
+                            <div class="origin-side">
+                                <div class="origin-title">传统配方</div>
+                                <div class="origin-ingredients">
+                                    <div class="origin-ingredient">黑芝麻</div>
+                                    <div class="origin-ingredient">松脂</div>
+                                    <div class="origin-ingredient">麦冬</div>
+                                    <div class="origin-ingredient">枸杞</div>
+                                </div>
+                            </div>
+                            <div class="origin-divider">
+                                <div class="origin-arrow">
+                                    <span class="material-icons">arrow_forward</span>
+                                </div>
+                            </div>
+                            <div class="origin-side">
+                                <div class="origin-title">现代配方</div>
+                                <div class="origin-ingredients">
+                                    <div class="origin-ingredient modern">黑芝麻</div>
+                                    <div class="origin-ingredient modern">燕麦</div>
+                                    <div class="origin-ingredient modern">山药</div>
+                                    <div class="origin-ingredient modern">枸杞</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-reviews-preview">
+                    <div class="reviews-header">
+                        <h3>用户评价</h3>
+                        <a href="#" class="more-link">查看全部</a>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" class="review-avatar">
+                            <div class="review-info">
+                                <div class="review-author">张丽华</div>
+                                <div class="review-rating">
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                </div>
+                            </div>
+                            <div class="review-date">2023/09/10</div>
+                        </div>
+                        <div class="review-content">
+                            <p>完成了7天的辟谷，这款辟谷丸真的很有用！最开始两天很饿，但服用后明显感觉饥饿感减轻了。而且没有出现头晕、乏力等不适，精神状态反而比平时好。辟谷结束后皮肤状态也有明显改善，推荐想尝试辟谷的朋友使用。</p>
+                        </div>
+                        <div class="review-images">
+                            <div class="review-image" style="background-image: url('https://images.unsplash.com/photo-1600618528240-fb9fc964b853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                            <div class="review-image" style="background-image: url('https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80');"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 80px;"></div>
+            </div>
+            <div class="product-purchase-bar">
+                <div class="purchase-options">
+                    <div class="purchase-option">
+                        <div class="option-name">单盒装</div>
+                        <div class="option-price">¥128</div>
+                    </div>
+                    <div class="purchase-option active">
+                        <div class="option-name">双盒装</div>
+                        <div class="option-price">¥228</div>
+                    </div>
+                    <div class="purchase-option">
+                        <div class="option-name">家庭装</div>
+                        <div class="option-price">¥328</div>
+                    </div>
+                </div>
+                <div class="purchase-buttons">
+                    <button class="button outline" style="flex: 1;">加入购物车</button>
+                    <button class="button primary" style="flex: 2;">立即购买</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI 助手聊天页面 -->
+        <div class="screen" id="ai-chat">
+            <div class="header">
+                <button class="icon-button" onclick="window.location.href='#tools'">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+                <div class="header-title">养生AI助手</div>
+                <div class="header-action">
+                    <button class="icon-button">
+                        <span class="material-icons">help_outline</span>
+                    </button>
+                </div>
+            </div>
+            <div class="ai-chat-container">
+                <div class="chat-welcome">
+                    <div class="ai-avatar">
+                        <span class="material-icons">psychology</span>
+                    </div>
+                    <h3>您好，我是养生AI助手</h3>
+                    <p>我可以回答您关于辟谷养生的问题，提供个性化建议和专业知识指导</p>
+                    <div class="suggested-questions">
+                        <div class="suggestion-chip">辟谷新手注意事项?</div>
+                        <div class="suggestion-chip">如何缓解辟谷期饥饿感?</div>
+                        <div class="suggestion-chip">辟谷与间歇性断食的区别?</div>
+                        <div class="suggestion-chip">辟谷后如何健康复食?</div>
+                    </div>
+                </div>
+                <div class="ai-chat-messages" id="chat-messages">
+                    <!-- 消息内容将通过JS动态添加 -->
+                </div>
+            </div>
+            <div class="ai-chat-input-container">
+                <input type="text" id="ai-chat-input" class="ai-chat-input" placeholder="输入您的问题...">
+                <button id="ai-send-button" class="ai-send-button">
+                    <span class="material-icons">send</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
