@@ -1707,24 +1707,39 @@ body {
     font-size: 14px;
     margin-right: 2px;
 }
-
 .create-post-fab {
-    position: fixed;
-    bottom: 100px;
-    right: var(--space-md);
-    width: 56px;
-    height: 56px;
+    position: absolute;
+    bottom: 86px;  /* 调整到导航栏高度中间 */
+    right: 20px;
+    width: 36px;  /* 减小尺寸以适应导航栏 */
+    height: 36px;
     border-radius: var(--radius-full);
     background: var(--primary);
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-neon);
     border: none;
-    font-size: 24px;
-    z-index: 100;
+    box-shadow: var(--shadow-card);
+    z-index: 10;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
+
+.create-post-fab:hover {
+    transform: scale(1.05);
+    background: var(--primary-dark);
+}
+
+.create-post-fab .material-icons {
+    font-size: 20px;  /* 减小图标尺寸 */
+}
+
+#community .header {
+    position: relative;  /* 让header成为定位上下文 */
+}
+
+/* 移除之前的content相关样式，因为不再需要了 */
 
 /* 知识库页面 */
 .knowledge-categories {
@@ -2969,15 +2984,22 @@ body {
 }
 
 .product-purchase-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     background: var(--bg-card);
-    border-top: 1px solid var(--border-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
     padding: var(--space-md);
-    z-index: 100;
+    width: 100%;
+    margin-bottom: var(--space-md);
 }
+
+#product-detail .product-purchase-bar {
+    width: 100%;
+}
+
+#product-detail .content {
+    padding-bottom: var(--space-md);
+}
+
 
 .purchase-options {
     display: flex;
@@ -3190,7 +3212,7 @@ body {
     }
 }
 
-.ai-chat-input-container {
+.ai-chat-input-container1 {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -3200,8 +3222,24 @@ body {
     display: flex;
     border-top: 1px solid var(--border-light);
     z-index: 100;
-}
+    width: 100%;
+    max-width: 360px;
+    left: 50%;
+    transform: translateX(-50%);
 
+}
+.ai-chat-input-container {
+    width: 100%;
+    display: flex;
+
+    /* max-width: none; */
+    /* left: 0; */
+    /* right: 0; */
+    /* transform: none; */
+}
+#ai-chat .ai-chat-container {
+    padding-bottom: 90px;
+}
 .ai-chat-input {
     flex: 1;
     background: var(--bg-dark);
