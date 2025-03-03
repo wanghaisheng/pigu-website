@@ -1,6 +1,24 @@
 // Initialize conversationHistory globally
 let conversationHistory = [];
+document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.details-tab');
+    const contents = document.querySelectorAll('.details-content');
 
+    tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // 移除所有 active 类
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            // 添加 active 类到当前选中的 tab 和对应的内容
+            tab.classList.add('active');
+            const contentId = tab.getAttribute('href').substring(1);
+            document.getElementById(contentId).classList.add('active');
+        });
+    });
+});
 document.addEventListener('DOMContentLoaded', function() {
     // AI Chat functionality
     const chatMessages = document.getElementById('chat-messages');
